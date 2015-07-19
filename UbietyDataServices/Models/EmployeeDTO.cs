@@ -10,6 +10,7 @@ namespace UbietyDataServices.Models
         public string EmpName { get; set; }
         public int EmpId { get; set; }
         public int EmpStatus { get; set; }
+        public string EmpNum { get; set; }
 
     }
 }

@@ -14,24 +14,23 @@ namespace UbietyDataServices.Controllers
     public class EmployeesController : ApiController
     {
 
-        [Route("GetEmpDetails/{email}/{mobileno}")]
+        [Route("GetEmpDetails/{empnum}/{email}/{mobileno}")]
         [HttpGet]
-        public IQueryable<EmployeeDTO> GetWith3ParametersAttributeRouting(string email, Int64 mobileno)
+        public IQueryable<EmployeeDTO> GetEmpDetail(string empnum, string email, Int64 mobileno)
         {
             var context = new ubietydbEntities();
             
             context.Configuration.ProxyCreationEnabled = false;
 
             var dataset2 = (from recordset in context.Employees
-                            where recordset.Email == email && recordset.PrimaryMobile == mobileno
+                            where recordset.EmpNum == empnum && recordset.Email == email && recordset.PrimaryMobile == mobileno
                             select new EmployeeDTO
                             {
                                 EmpId = recordset.EmpId,
+                                EmpNum = recordset.EmpNum,
                                 EmpName = recordset.EmpName,
                                 EmpStatus = recordset.EmpStatus
                             });
-
-
             return dataset2;
         }
     }
