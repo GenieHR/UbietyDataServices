@@ -16,9 +16,12 @@ namespace UbietyDataServices
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            // This is required if you use XML serialization
+            var xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
+            xml.UseXmlSerializer = true;
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
