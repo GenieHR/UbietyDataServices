@@ -11,6 +11,10 @@ namespace UbietyDataServices.Models
         public int EmpId { get; set; }
         public int EmpStatus { get; set; }
         public string EmpNum { get; set; }
+        public string Email { get; set; }
+        public int Otp { get; set; }
+
+        
 
     }
 }
