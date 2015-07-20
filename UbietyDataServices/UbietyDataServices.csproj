@@ -194,6 +194,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Models\EmployeeDTO.cs" />
+    <Compile Include="Services\MockUpload.aspx.cs">
+      <DependentUpon>MockUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\MockUpload.aspx.designer.cs">
+      <DependentUpon>MockUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\photoupload.aspx.cs">
       <DependentUpon>photoupload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,6 +325,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Services\MockUpload.aspx" />
     <Content Include="Services\photoupload.aspx" />
     <Content Include="obj\favicon.ico" />
     <Content Include="Global.asax" />

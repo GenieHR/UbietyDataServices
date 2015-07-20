@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+   <asp:Literal runat="server" id="txtValueA" EnableViewState="false" />
     </div>
     </form>
 </body>
