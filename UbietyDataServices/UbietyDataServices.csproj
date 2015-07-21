@@ -190,27 +190,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Models\EmployeeDTO.cs" />
-    <Compile Include="Services\MockUpload.aspx.cs">
-      <DependentUpon>MockUpload.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Services\MockUpload.aspx.designer.cs">
-      <DependentUpon>MockUpload.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\photoupload.aspx.cs">
-      <DependentUpon>photoupload.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Services\photoupload.aspx.designer.cs">
-      <DependentUpon>photoupload.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\Address.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
@@ -226,6 +209,7 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeDTO.cs" />
     <Compile Include="Models\EmpStatu.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
@@ -252,6 +236,23 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\MockUpload.aspx.cs">
+      <DependentUpon>MockUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\MockUpload.aspx.designer.cs">
+      <DependentUpon>MockUpload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\photoupload.aspx.cs">
+      <DependentUpon>photoupload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Services\photoupload.aspx.designer.cs">
+      <DependentUpon>photoupload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\register.aspx.cs">
@@ -330,23 +331,6 @@
     <Content Include="obj\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="WebForm2.aspx" />
-    <EntityDeploy Include="Models\ubietydbEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ubietydbEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ubietydbEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
-      <LastGenOutput>ubietydbEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ubietydbEntities.edmx.diagram">
-      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ubietydbEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
-      <LastGenOutput>ubietydbEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -366,6 +350,23 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\ubietydbEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ubietydbEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ubietydbEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+      <LastGenOutput>ubietydbEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ubietydbEntities.edmx.diagram">
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ubietydbEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+      <LastGenOutput>ubietydbEntities.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\ubietyapi %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ubietyapi.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />

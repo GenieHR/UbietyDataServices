@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -32,7 +32,7 @@
           </Key>
           <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpId" Type="int" Nullable="false" />
-          <Property Name="MarkFlagId" Type="int" Nullable="false" />
+          <Property Name="MarkFlagId" Type="int" />
           <Property Name="MarkTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
@@ -100,7 +100,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Attendance_AttendanceFlag">
-          <End Role="AttendanceFlag" Type="Self.AttendanceFlag" Multiplicity="1" />
+          <End Role="AttendanceFlag" Type="Self.AttendanceFlag" Multiplicity="0..1" />
           <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AttendanceFlag">
@@ -210,7 +210,8 @@
             <End Role="Login" EntitySet="Login" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ubietydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -242,12 +243,12 @@
           <Key>
             <PropertyRef Name="AttendanceId" />
           </Key>
-          <Property Name="AttendanceId" Type="Int32" Nullable="false" />
+          <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpId" Type="Int32" Nullable="false" />
-          <Property Name="MarkFlagId" Type="Int32" Nullable="false" />
+          <Property Name="MarkFlagId" Type="Int32" />
           <Property Name="MarkTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AttendanceFlag" Relationship="Self.FK_Attendance_AttendanceFlag" FromRole="Attendance" ToRole="AttendanceFlag" />
-          <NavigationProperty Name="Employee" Relationship="ubietydbModel.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
@@ -269,9 +270,9 @@
           <Property Name="ClientId" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrimaryMobile" Type="Int64" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="EmpStatu" Relationship="Self.FK_Employee_EmpStatus" FromRole="Employee" ToRole="EmpStatus" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
-          <NavigationProperty Name="Attendances" Relationship="ubietydbModel.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="EmpStatu">
           <Key>
@@ -335,7 +336,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Attendance_AttendanceFlag">
-          <End Role="AttendanceFlag" Type="Self.AttendanceFlag" Multiplicity="1" />
+          <End Role="AttendanceFlag" Type="Self.AttendanceFlag" Multiplicity="0..1" />
           <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AttendanceFlag">
@@ -343,6 +344,18 @@
             </Principal>
             <Dependent Role="Attendance">
               <PropertyRef Name="MarkFlagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="EmpId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -404,6 +417,10 @@
             <End Role="AttendanceFlag" EntitySet="AttendanceFlags" />
             <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Employee" Association="Self.FK_Attendance_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_EmpStatus" Association="Self.FK_Employee_EmpStatus">
             <End Role="EmpStatus" EntitySet="EmpStatus" />
             <End Role="Employee" EntitySet="Employees" />
@@ -416,23 +433,7 @@
             <End Role="EntityType" EntitySet="EntityTypes" />
             <End Role="EntityAddresses" EntitySet="EntityAddresses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Attendance_Employee" Association="ubietydbModel.FK_Attendance_Employee">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Attendance_Employee">
-          <End Type="ubietydbModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="ubietydbModel.Attendance" Role="Attendance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmpId" />
-            </Principal>
-            <Dependent Role="Attendance">
-              <PropertyRef Name="EmpId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

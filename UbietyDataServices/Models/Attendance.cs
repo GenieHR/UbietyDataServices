@@ -16,7 +16,7 @@ namespace UbietyDataServices.Models
     {
         public int AttendanceId { get; set; }
         public int EmpId { get; set; }
-        public int MarkFlagId { get; set; }
+        public Nullable<int> MarkFlagId { get; set; }
         public System.DateTime MarkTime { get; set; }
     
         public virtual AttendanceFlag AttendanceFlag { get; set; }

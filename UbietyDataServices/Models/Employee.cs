@@ -28,8 +28,8 @@ namespace UbietyDataServices.Models
         public string Email { get; set; }
         public Nullable<long> PrimaryMobile { get; set; }
     
+        public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual EmpStatu EmpStatu { get; set; }
         public virtual Login Login { get; set; }
-        public virtual ICollection<Attendance> Attendances { get; set; }
     }
 }
