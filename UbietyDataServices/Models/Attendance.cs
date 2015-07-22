@@ -18,6 +18,7 @@ namespace UbietyDataServices.Models
         public int EmpId { get; set; }
         public Nullable<int> MarkFlagId { get; set; }
         public System.DateTime MarkTime { get; set; }
+        public System.Data.Spatial.DbGeography coordinates { get; set; }
     
         public virtual AttendanceFlag AttendanceFlag { get; set; }
         public virtual Employee Employee { get; set; }

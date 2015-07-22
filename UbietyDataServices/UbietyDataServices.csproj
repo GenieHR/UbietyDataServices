@@ -191,6 +191,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\BlobsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -210,6 +211,7 @@
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeDTO.cs" />
+    <Compile Include="Models\EmployeeeBlobs.cs" />
     <Compile Include="Models\EmpStatu.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -34,6 +34,7 @@
           <Property Name="EmpId" Type="int" Nullable="false" />
           <Property Name="MarkFlagId" Type="int" />
           <Property Name="MarkTime" Type="datetime" Nullable="false" />
+          <Property Name="coordinates" Type="geography" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
@@ -210,8 +211,7 @@
             <End Role="Login" EntitySet="Login" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ubietydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -249,6 +249,7 @@
           <Property Name="MarkTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AttendanceFlag" Relationship="Self.FK_Attendance_AttendanceFlag" FromRole="Attendance" ToRole="AttendanceFlag" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
+          <Property Name="coordinates" Type="Geography" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
@@ -466,6 +467,7 @@
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="ubietydbModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
                 <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="MarkFlagId" ColumnName="MarkFlagId" />

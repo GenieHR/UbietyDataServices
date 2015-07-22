@@ -10,6 +10,7 @@ using System;
 using System.Text;
 using System.IO;
 using System.Data.Entity;
+using System.Data.Spatial;
 
 namespace UbietyDataServices.Controllers
 {
@@ -34,5 +35,22 @@ namespace UbietyDataServices.Controllers
             
         }
 
+        [Route("punch/{empid}/{shift}/{latitude}/{longitude}")]
+        [HttpGet]
+        public int MarkAttendanceWithLatLon(int empid, int shift, Double latitude, Double longitude)
+        {
+            var ctx = new ubietydbEntities();
+
+            Attendance attendance = new Attendance();
+
+            attendance.EmpId = empid;
+            attendance.MarkFlagId = shift;
+            attendance.MarkTime = TimeZoneInfo.ConvertTime(new DateTime(DateTime.Now.Ticks), TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
+            String pointText = "POINT(" + longitude.ToString() + " " + latitude.ToString() + ")";
+            attendance.coordinates = DbGeography.FromText(pointText);
+            ctx.Attendances.Add(attendance);
+
+            return ctx.SaveChanges();
+        }
     }
 }
