@@ -11,46 +11,75 @@ using System.Text;
 using System.IO;
 using System.Data.Entity;
 using System.Data.Spatial;
+using System.Spatial;
+using System.Runtime.Serialization.Json;
+
 
 namespace UbietyDataServices.Controllers
 {
     [RoutePrefix("api/attendance")]
     public class AttendanceController : ApiController
     {
+        
         [Route("punch/{empid}/{shift}")]
         [HttpGet]
 
         public int MarkAttendance(int empid, int shift)
         {
-            var ctx = new ubietydbEntities();
+            var context = new ubietydbEntities();
 
             Attendance attendance = new Attendance();
 
             attendance.EmpId = empid;
             attendance.MarkFlagId = shift;
             attendance.MarkTime =  TimeZoneInfo.ConvertTime(new DateTime(DateTime.Now.Ticks), TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
-            ctx.Attendances.Add(attendance);
+            context.Attendances.Add(attendance);
           
-            return ctx.SaveChanges();
-            
+            return context.SaveChanges();
         }
 
-        [Route("punch/{empid}/{shift}/{latitude}/{longitude}")]
+        [Route("punch/{empid}/{shift}/{latitude}/{longitude}/{markcount}")]
         [HttpGet]
-        public int MarkAttendanceWithLatLon(int empid, int shift, Double latitude, Double longitude)
+        public int MarkAttendanceWithLatLon(int empid, int shift, Double latitude, Double longitude, Int16 markcount)
         {
-            var ctx = new ubietydbEntities();
+            var context = new ubietydbEntities();
 
             Attendance attendance = new Attendance();
 
             attendance.EmpId = empid;
             attendance.MarkFlagId = shift;
             attendance.MarkTime = TimeZoneInfo.ConvertTime(new DateTime(DateTime.Now.Ticks), TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
-            String pointText = "POINT(" + longitude.ToString() + " " + latitude.ToString() + ")";
-            attendance.coordinates = DbGeography.FromText(pointText);
-            ctx.Attendances.Add(attendance);
+            attendance.latitude = latitude;
+            attendance.longitude = longitude;
+            attendance.markcount = markcount;
+            context.Attendances.Add(attendance);
 
-            return ctx.SaveChanges();
+            return context.SaveChanges();
+        }
+
+        [Route("of/{id}")]
+        [HttpGet]
+        public dynamic getAttendance(int id)
+        {
+            var context = new ubietydbEntities();
+            context.Configuration.ProxyCreationEnabled = false;
+
+              var abc = (from recordset in context.attendancereports
+                                where recordset.empid == id 
+                                select new AttendanceLineDetail
+                                {
+                                    inMarkTime = recordset.inmarktime,
+                                    inLatitude = recordset.inlatitude,
+                                    inLongitude = recordset.inlongitude,
+                                    inMarkCount = 1,
+                                    empId = recordset.empid,
+                                    outMarkTime = recordset.outmarktime,
+                                    outLatitude = recordset.outlatitude,
+                                    outLongitude = recordset.outlongitude,
+                                    outMarkCount = 2
+                                });
+
+            return new { attendance = abc };
         }
     }
 }

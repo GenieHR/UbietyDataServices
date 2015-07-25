@@ -34,7 +34,9 @@
           <Property Name="EmpId" Type="int" Nullable="false" />
           <Property Name="MarkFlagId" Type="int" />
           <Property Name="MarkTime" Type="datetime" Nullable="false" />
-          <Property Name="coordinates" Type="geography" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="markcount" Type="int" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
@@ -87,6 +89,20 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmpId" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ubietydb.dbo.attendancereport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="attendancereport">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="int" Nullable="false" />
+          <Property Name="inlatitude" Type="float" />
+          <Property Name="outlatitude" Type="float" />
+          <Property Name="inlongitude" Type="float" />
+          <Property Name="outlongitude" Type="float" />
+          <Property Name="inmarktime" Type="datetime" />
+          <Property Name="outmarktime" Type="datetime" />
         </EntityType>
         <Association Name="FK_Address_AddressType">
           <End Role="AddressType" Type="Self.AddressType" Multiplicity="1" />
@@ -182,6 +198,17 @@
           <EntitySet Name="EntityAddresses" EntityType="Self.EntityAddresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EntityType" EntityType="Self.EntityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="attendancereport" EntityType="Self.attendancereport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[attendancereport].[empid] AS [empid], 
+[attendancereport].[inlatitude] AS [inlatitude], 
+[attendancereport].[outlatitude] AS [outlatitude], 
+[attendancereport].[inlongitude] AS [inlongitude], 
+[attendancereport].[outlongitude] AS [outlongitude], 
+[attendancereport].[inmarktime] AS [inmarktime], 
+[attendancereport].[outmarktime] AS [outmarktime]
+FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
             <End Role="AddressType" EntitySet="AddressType" />
             <End Role="Address" EntitySet="Address" />
@@ -249,7 +276,9 @@
           <Property Name="MarkTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AttendanceFlag" Relationship="Self.FK_Attendance_AttendanceFlag" FromRole="Attendance" ToRole="AttendanceFlag" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
-          <Property Name="coordinates" Type="Geography" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="markcount" Type="Int32" />
         </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
@@ -434,7 +463,20 @@
             <End Role="EntityType" EntitySet="EntityTypes" />
             <End Role="EntityAddresses" EntitySet="EntityAddresses" />
           </AssociationSet>
+          <EntitySet Name="attendancereports" EntityType="ubietydbModel.attendancereport" />
         </EntityContainer>
+        <EntityType Name="attendancereport">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="Int32" Nullable="false" />
+          <Property Name="inlatitude" Type="Double" />
+          <Property Name="outlatitude" Type="Double" />
+          <Property Name="inlongitude" Type="Double" />
+          <Property Name="outlongitude" Type="Double" />
+          <Property Name="inmarktime" Type="DateTime" Precision="3" />
+          <Property Name="outmarktime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -467,7 +509,9 @@
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="ubietydbModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+                <ScalarProperty Name="markcount" ColumnName="markcount" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="MarkFlagId" ColumnName="MarkFlagId" />
@@ -530,6 +574,19 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attendancereports">
+            <EntityTypeMapping TypeName="ubietydbModel.attendancereport">
+              <MappingFragment StoreEntitySet="attendancereport">
+                <ScalarProperty Name="outmarktime" ColumnName="outmarktime" />
+                <ScalarProperty Name="inmarktime" ColumnName="inmarktime" />
+                <ScalarProperty Name="outlongitude" ColumnName="outlongitude" />
+                <ScalarProperty Name="inlongitude" ColumnName="inlongitude" />
+                <ScalarProperty Name="outlatitude" ColumnName="outlatitude" />
+                <ScalarProperty Name="inlatitude" ColumnName="inlatitude" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -204,9 +204,16 @@
     <Compile Include="Models\Attendance.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AttendanceLineDetail.cs" />
+    <Compile Include="Models\AttendanceDTO.cs" />
     <Compile Include="Models\AttendanceFlag.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\attendancereport.cs">
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentBuilder.cs" />
+    <Compile Include="Models\DocumentBuilderFactory.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>

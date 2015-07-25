@@ -12,17 +12,14 @@ namespace UbietyDataServices.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Attendance
+    public partial class attendancereport
     {
-        public int AttendanceId { get; set; }
-        public int EmpId { get; set; }
-        public Nullable<int> MarkFlagId { get; set; }
-        public System.DateTime MarkTime { get; set; }
-        public Nullable<double> latitude { get; set; }
-        public Nullable<double> longitude { get; set; }
-        public Nullable<int> markcount { get; set; }
-    
-        public virtual AttendanceFlag AttendanceFlag { get; set; }
-        public virtual Employee Employee { get; set; }
+        public int empid { get; set; }
+        public Nullable<double> inlatitude { get; set; }
+        public Nullable<double> outlatitude { get; set; }
+        public Nullable<double> inlongitude { get; set; }
+        public Nullable<double> outlongitude { get; set; }
+        public Nullable<System.DateTime> inmarktime { get; set; }
+        public Nullable<System.DateTime> outmarktime { get; set; }
     }
 }

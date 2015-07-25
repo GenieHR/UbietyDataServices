@@ -32,23 +32,21 @@ namespace UbietyDataServices
             });
 
             DateTime IST = TimeZoneInfo.ConvertTime(new DateTime(DateTime.Now.Ticks), TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
-
-            String blobName = Request.Form["name"] + "/" + IST.ToString("yyyy") + "/" + IST.ToString("MM") + "/" + IST.ToString("dd") + "/" + "AM";
-
+            String blobName = Request.Form["name"] + "/" + IST.ToString("yyyy") + "/" + IST.ToString("MM") + "/" + IST.ToString("dd") + "/" + Request.Form["count"].ToString();
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(blobName);
-
-            if (blockBlob.Exists())
-            {
-                blockBlob = container.GetBlockBlobReference(blobName.Replace("/AM", "/PM"));
-            }
-
-            if (!blockBlob.Exists())
-            {
-                blockBlob.Metadata.Add("Latitude", Request.Form["latitude"]);
-                blockBlob.Metadata.Add("Longitude", Request.Form["longitude"]);
-
-                blockBlob.UploadFromStream(Request.Files[0].InputStream);
-            }
+            
+            blockBlob.UploadFromStream(Request.Files[0].InputStream);
+ 
+            //if (blockBlob.Exists())
+            //{
+            //    blockBlob = container.GetBlockBlobReference(blobName.Replace("/AM", "/PM"));
+            //}
+            //if (!blockBlob.Exists())
+            //{
+            //    blockBlob.Metadata.Add("Latitude", Request.Form["latitude"]);
+            //    blockBlob.Metadata.Add("Longitude", Request.Form["longitude"]);
+            //    blockBlob.UploadFromStream(Request.Files[0].InputStream);
+            //}
         }
     }
 }

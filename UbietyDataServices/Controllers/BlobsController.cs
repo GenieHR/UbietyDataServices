@@ -15,11 +15,10 @@ using System.IO;
 
 namespace UbietyDataServices.Controllers
 {
-    [RoutePrefix("api/getblobs")]
+    [RoutePrefix("api/get")]
     public class BlobsController : ApiController
     {
-        [Route("of/{empnum}/{year}/{month}/{day}")]
-        
+        [Route("blobsof/{empnum}/{year}/{month}/{day}")]
         [HttpGet]
         public string getBlobs(String empnum, String year, String month, String day)
         {
@@ -71,5 +70,7 @@ namespace UbietyDataServices.Controllers
             }
             return JsonConvert.SerializeObject(blobList, Formatting.None);
         }
+
+
     }
 }

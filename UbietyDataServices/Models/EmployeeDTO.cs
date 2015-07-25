@@ -13,8 +13,8 @@ namespace UbietyDataServices.Models
         public string EmpNum { get; set; }
         public string Email { get; set; }
         public int Otp { get; set; }
-
+        public long? MobileNum { get; set; }
+        public String ProfilePicURL { get; set; }
         
-
     }
 }

@@ -17,7 +17,7 @@ namespace UbietyDataServices.Controllers
     {
         [Route("GetEmpDetails/{empnum}/{email}/{mobileno}")]
         [HttpGet]
-        public IQueryable<EmployeeDTO> GetEmpetail(string empnum, string email, Int64 mobileno)
+        public IQueryable<EmployeeDTO> GetEmpDetail(string empnum, string email, Int64 mobileno)
         {
             var context = new ubietydbEntities();
             
@@ -38,6 +38,28 @@ namespace UbietyDataServices.Controllers
                             });
 
             return dataset2;
+        }
+
+        [Route("GetEmpDetails/")]
+        [HttpGet]
+        public IQueryable<EmployeeDTO> GetEmpList()
+        {
+            var context = new ubietydbEntities();
+            context.Configuration.ProxyCreationEnabled = false;
+
+            var dataset2 = (from recordset in context.Employees
+                            where recordset.EmpStatus == 1 
+                            select new EmployeeDTO
+                            {
+                                EmpId = recordset.EmpId,
+                                EmpNum = recordset.EmpNum,
+                                EmpName = recordset.EmpName,
+                                Email = recordset.Email,
+                                MobileNum = recordset.PrimaryMobile,
+                                ProfilePicURL = recordset.ProfilePic
+                            });
+            return dataset2;
+
         }
     }
 }
