@@ -238,7 +238,7 @@
                                                 <i class="fa fa-book fa-5x"></i>
                                             </div>
                                             <div class="col-xs-8 text-center">
-                                                <h3> Monitor</h3> <h3>Attendance </h3>
+                                             <a href="EmployeeList.aspx">   <h3> Monitor</h3> <h3>Attendance </h3></a>
                                             </div>
                                         </div>
                                     </div>
