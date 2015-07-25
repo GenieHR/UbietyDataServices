@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dashboard.aspx.cs" Inherits="UbietyAdmin.dashboard" %>
 
-
 <!DOCTYPE html>
 <html>
-
 
 <head>
 
