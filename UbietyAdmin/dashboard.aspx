@@ -76,7 +76,7 @@
         <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="http://webapplayers.com/inspinia_admin-v2.2/search_results.html">
+            <form role="search" class="navbar-form-custom" >
                 <div class="form-group">
                     <input type="text" placeholder="Search your Employees..." class="form-control" name="top-search" id="top-search">
                 </div>
@@ -148,11 +148,7 @@
                         </li>
                     </ol>
                 </div>
-                <div class="col-sm-8">
-                    <!--<div class="title-action">
-                        <a href="#" class="btn btn-primary">This is action area</a>
-                    </div>-->
-                </div>
+                
             </div>
 
             <div class="wrapper wrapper-content">

@@ -9,7 +9,7 @@
 
 
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css"/>
-
+    <link href="css/spinners.css" rel="stylesheet" />
     
     <!-- Data Tables -->
     <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
@@ -22,22 +22,168 @@
     <link href="css/animate.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
 
-    <title></title>
+        <title>Employee Profile</title>
+
     <style>
+        .open-viewImageDialog {
+
+        }
+    
         .dataTables_wrapper .nohead table thead{
     display:none;
 }
     </style>
 </head>
 <body>
-    <div class="wrapper wrapper-content  animated fadeInRight">
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">Administrator</strong>
+                                    </span> <span class="text-muted text-xs block">Super Admin <b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                    <li>
+                        <a href="dashboard.aspx"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+
+
+                    <li>
+                        <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> <span class="label label-primary pull-right">NEW</span> </a>
+                    </li>
+                    <li>
+                        <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">App Views</span>  <span class="pull-right label label-primary">SPECIAL</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="calendar.html">Calendar</a></li>
+                            <li><a href="timeline.html">Timeline</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+               <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" >
+                <div class="form-group">
+                    <input type="text" placeholder="Search your Employees..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="mailbox.html">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="profile.html">
+                                <div>
+                                    <i class="fa fa-user fa-fw"></i> 3 New Leave Info
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-money fa-fw"></i> 12 Claims Pending
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="notifications.html">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <h1>Profile</h1>
+                </div>
+                
+            </div>
             <div class="row">
-                <div class="col-sm-12 col-lg-12">
+                <div class="col-sm-4 col-lg-4">
                     <div class="ibox">
+                        <div class="ibox-title">
+                           <h1 id="EmpName" class="text-center text-navy">  </h1>
+                        </div>
                         <div class="ibox-content">
+                            <img src="http://www.hydrogenaud.io/forums/uploads/profile/photo-119400.jpg" />
+                            <br />
+                            <br />
+                            <h4 class="text-justify">Employee No. <span class="text-info" id="EmpNum"></span></h4>
+                            <h4 class="text-justify">Email Addr. <span class="text-info" id="Email"></span></h4>
+                            <h4 class="text-justify">Mobile  Num. <span class="text-info" id="MobileNo"></span></h4>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-sm-8 col-lg-8">
+                    <div class="ibox">
+                        <div class="ibox-content ">
                             <%--<span class="text-muted small pull-right">Last modification: <i class="fa fa-clock-o"></i> 2:10 pm - 12.06.2014</span>--%>
-                            <h2>Employee Profile</h2>
-                            
+
                             <ul class="nav nav-tabs ">
                                 <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> Attendance</a></li>
                                 <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i> Leave </a></li>
@@ -52,353 +198,210 @@
                                             <div class="dataTables_wrapper">
                                                 <table id="regionsdt" class="table table-bordered table-hover">
                                                     <thead>
-                                                         <tr>
-                <th rowspan="2">Date</th>
-                <th colspan="3" class="text-center">IN</th>
-                <th colspan="3" class="text-center">OUT</th>
-            </tr>
+                                                        <tr>
+                                                            <th rowspan="2">Date</th>
+                                                            <th colspan="3" class="text-center">IN</th>
+                                                            <th colspan="3" class="text-center">OUT</th>
+                                                        </tr>
                                                         <tr>
                                                             <th>Time</th>
                                                             <th>Location</th>
-                                                            <th>Image URL</th>
+                                                            <th>Image</th>
                                                             <th>Time</th>
                                                             <th>Location</th>
-                                                            <th>Image URL</th>
-
+                                                            <th>Image</th>
                                                         </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div>
+                                                    </thead>
+                                                </table>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="tab-2" class="tab-pane">
                                     <div class="full-height-scroll">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <tbody>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tellus Institute</a></td>
-                                                    <td>Rexton</td>
-                                                    <td><i class="fa fa-flag"></i> Angola</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Velit Industries</a></td>
-                                                    <td>Maglie</td>
-                                                    <td><i class="fa fa-flag"></i> Luxembourg</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link">Art Limited</a></td>
-                                                    <td>Sooke</td>
-                                                    <td><i class="fa fa-flag"></i> Philippines</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tempor Arcu Corp.</a></td>
-                                                    <td>Eisden</td>
-                                                    <td><i class="fa fa-flag"></i> Korea, North</td>
-                                                    <td class="client-status"><span class="label label-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Penatibus Consulting</a></td>
-                                                    <td>Tribogna</td>
-                                                    <td><i class="fa fa-flag"></i> Montserrat</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link"> Ultrices Incorporated</a></td>
-                                                    <td>Basingstoke</td>
-                                                    <td><i class="fa fa-flag"></i> Tunisia</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tellus Institute</a></td>
-                                                    <td>Rexton</td>
-                                                    <td><i class="fa fa-flag"></i> Angola</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Velit Industries</a></td>
-                                                    <td>Maglie</td>
-                                                    <td><i class="fa fa-flag"></i> Luxembourg</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link">Art Limited</a></td>
-                                                    <td>Sooke</td>
-                                                    <td><i class="fa fa-flag"></i> Philippines</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tempor Arcu Corp.</a></td>
-                                                    <td>Eisden</td>
-                                                    <td><i class="fa fa-flag"></i> Korea, North</td>
-                                                    <td class="client-status"><span class="label label-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Penatibus Consulting</a></td>
-                                                    <td>Tribogna</td>
-                                                    <td><i class="fa fa-flag"></i> Montserrat</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link"> Ultrices Incorporated</a></td>
-                                                    <td>Basingstoke</td>
-                                                    <td><i class="fa fa-flag"></i> Tunisia</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tellus Institute</a></td>
-                                                    <td>Rexton</td>
-                                                    <td><i class="fa fa-flag"></i> Angola</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Velit Industries</a></td>
-                                                    <td>Maglie</td>
-                                                    <td><i class="fa fa-flag"></i> Luxembourg</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link">Art Limited</a></td>
-                                                    <td>Sooke</td>
-                                                    <td><i class="fa fa-flag"></i> Philippines</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tempor Arcu Corp.</a></td>
-                                                    <td>Eisden</td>
-                                                    <td><i class="fa fa-flag"></i> Korea, North</td>
-                                                    <td class="client-status"><span class="label label-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Penatibus Consulting</a></td>
-                                                    <td>Tribogna</td>
-                                                    <td><i class="fa fa-flag"></i> Montserrat</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link"> Ultrices Incorporated</a></td>
-                                                    <td>Basingstoke</td>
-                                                    <td><i class="fa fa-flag"></i> Tunisia</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                      <h1 class="text-center">  <span class="text-success"><br /><br /><br /><span class="spinner">Loading…</span><br />Coming Soon...<br /><br /><br /><br /></span></h1>
                                     </div>
                                 </div>
                                 <div id="tab-3" class="tab-pane">
                                     <div class="full-height-scroll">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover">
-                                                <tbody>
-                                                
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tellus Institute</a></td>
-                                                    <td>Rexton</td>
-                                                    <td><i class="fa fa-flag"></i> Angola</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Velit Industries</a></td>
-                                                    <td>Maglie</td>
-                                                    <td><i class="fa fa-flag"></i> Luxembourg</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link">Art Limited</a></td>
-                                                    <td>Sooke</td>
-                                                    <td><i class="fa fa-flag"></i> Philippines</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tempor Arcu Corp.</a></td>
-                                                    <td>Eisden</td>
-                                                    <td><i class="fa fa-flag"></i> Korea, North</td>
-                                                    <td class="client-status"><span class="label label-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Penatibus Consulting</a></td>
-                                                    <td>Tribogna</td>
-                                                    <td><i class="fa fa-flag"></i> Montserrat</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link"> Ultrices Incorporated</a></td>
-                                                    <td>Basingstoke</td>
-                                                    <td><i class="fa fa-flag"></i> Tunisia</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tellus Institute</a></td>
-                                                    <td>Rexton</td>
-                                                    <td><i class="fa fa-flag"></i> Angola</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Velit Industries</a></td>
-                                                    <td>Maglie</td>
-                                                    <td><i class="fa fa-flag"></i> Luxembourg</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link">Art Limited</a></td>
-                                                    <td>Sooke</td>
-                                                    <td><i class="fa fa-flag"></i> Philippines</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-1" class="client-link">Tempor Arcu Corp.</a></td>
-                                                    <td>Eisden</td>
-                                                    <td><i class="fa fa-flag"></i> Korea, North</td>
-                                                    <td class="client-status"><span class="label label-warning">Waiting</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Penatibus Consulting</a></td>
-                                                    <td>Tribogna</td>
-                                                    <td><i class="fa fa-flag"></i> Montserrat</td>
-                                                    <td class="client-status"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-3" class="client-link"> Ultrices Incorporated</a></td>
-                                                    <td>Basingstoke</td>
-                                                    <td><i class="fa fa-flag"></i> Tunisia</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a data-toggle="tab" href="#company-2" class="client-link">Et Arcu Inc.</a></td>
-                                                    <td>Sioux City</td>
-                                                    <td><i class="fa fa-flag"></i> Burundi</td>
-                                                    <td class="client-status"><span class="label label-primary">Active</span></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                      <h1 class="text-center">  <span class=" text-success"><br /><br /><br /><span class="spinner">Loading…</span><br />Coming Soon...<br /><br /><br /><br /></span></h1>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="modal inmodal" id="viewImageDialog" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated fadeIn">
+                        <%--<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>--%>
+                        <div class="modal-body">
+
+                            <div class="col-md-12 col-lg-12">
+                                <center>
+                                    <img class="north" id="imageId" style="width:50%;height:50%" />
+                                    <br />
+                                    <br />
+                                    <input type="button" value="Rotate" />
+                                </center>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-        </div>
-     <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+                <style>
+                    .north {
+                        transform: rotate(0deg);
+                        -ms-transform: rotate(0deg); /* IE 9 */
+                        -webkit-transform: rotate(0deg); /* Safari and Chrome */
+                    }
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+                    .west {
+                        transform: rotate(90deg);
+                        -ms-transform: rotate(90deg); /* IE 9 */
+                        -webkit-transform: rotate(90deg); /* Safari and Chrome */
+                    }
 
-    
-    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-    <script src="js/plugins/dataTables/dataTables.responsive.js"></script>
-    <script src="js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+                    .south {
+                        transform: rotate(180deg);
+                        -ms-transform: rotate(180deg); /* IE 9 */
+                        -webkit-transform: rotate(180deg); /* Safari and Chrome */
+                    }
 
-<script>
+                    .east {
+                        transform: rotate(270deg);
+                        -ms-transform: rotate(270deg); /* IE 9 */
+                        -webkit-transform: rotate(270deg); /* Safari and Chrome */
+                    }
+                </style>
+                <script>
+                    $('input').click(function () {
+                        var img = $('#imageId');
+                        if (img.hasClass('north')) {
+                            img.attr('class', 'west');
+                        } else if (img.hasClass('west')) {
+                            img.attr('class', 'south');
+                        } else if (img.hasClass('south')) {
+                            img.attr('class', 'east');
+                        } else if (img.hasClass('east')) {
+                            img.attr('class', 'north');
+                        }
+                    });
 
-    function reverseGeoCode(latlng) {
-        var geocoder = new google.maps.Geocoder();
-        var input = latlng;
-        var latlngStr = input.split(',', 2);
-        var latlng = new google.maps.LatLng(latlngStr[0], latlngStr[1]);
-        geocoder.geocode({ 'location': latlng }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
-                    return results[1].formatted_address;
-                } else {
-                    return 'No results found';
+                </script>
+            </div>
+
+            <!-- Mainly scripts -->
+            <script src="js/jquery-2.1.1.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+            <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+            <!-- Custom and plugin javascript -->
+            <script src="js/inspinia.js"></script>
+            <script src="js/plugins/pace/pace.min.js"></script>
+
+            <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+            <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+            <script src="js/plugins/dataTables/dataTables.responsive.js"></script>
+            <script src="js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+            <script>
+
+                var profileURL = "http://ubietyapi.azurewebsites.net/api/attendance/of/" + getParameterByName('EmpId');
+                var profileURL2 = "http://ubietyapi.azurewebsites.net/api/employees/getempdetail/of/" + getParameterByName('EmpId') + '?jsoncallback=?';
+                var empJson = "";
+                var url = "https://ghrstorage.blob.core.windows.net/ubiety/";
+
+
+                function getParameterByName(name) {
+                    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
                 }
-            } else {
-                return 'Geocoder failed due to: ' + status;
-            }
-        });
-    }
 
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    
-        $(document).ready(function () {
+                $(document).ready(function () {
 
-            var table = $('#regionsdt').DataTable({
-                "retrieve": true,
-                "sDom": 'lfrtip',
-                "bPaginate": true,
-                "bJQueryUI": true,  
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": false,
-                "bAutoWidth": false,
-                "bProcessing": false,
-                "iDisplayLength": 30,
-                "ajax": {
-                    "url": "http://ubietyapi.azurewebsites.net/api/attendance/of/" + getParameterByName('EmpId'),
-                    "dataSrc": "attendance"
-                },
-                "columns": [
-                    { "data": "strMarkDate" },
-                    { "data": "strInMarkTime" },
-                    { "data": "inLocName" },
-                    { "data": "inImageURL" },
-                    { "data": "strOutMarkTime" },
-                    { "data": "outLocName" },
-                    { "data": "outImageURL" },
-                ],
-                "columnDefs": [
-            {
-                "render": function (data, type, row) {
-                    return data;
-                },
-                "targets": 2
-            }
-                ]
-            });
-    });
 
-</script>
-    
+                    $.ajax({
+                        url: profileURL2,
+                        beforeSend: function (xhr) {
+                            xhr.overrideMimeType("text/plain; charset=x-user-defined");
+                        }
+                    })
+                      .done(function (data) {
+                          var obj = JSON.parse(data);
+                              document.getElementById("EmpName").innerHTML = obj.employee[0].EmpName;
+                              document.getElementById("EmpNum").innerHTML = obj.employee[0].EmpNum;
+                              document.getElementById("Email").innerHTML = obj.employee[0].Email;
+                              document.getElementById("MobileNo").innerHTML = obj.employee[0].MobileNum;
+                      });
+
+                    var table = $('#regionsdt').DataTable({
+                        "retrieve": true,
+                        "sDom": 'lfrtip',
+                        "bPaginate": true,
+                        "bJQueryUI": true,
+                        "bLengthChange": false,
+                        "bFilter": true,
+                        "bSort": true,
+                        "bInfo": false,
+                        "bAutoWidth": false,
+                        "bProcessing": false,
+                        "iDisplayLength": 30,
+                        "ajax": {
+                            "url": profileURL,
+                            "dataSrc": "attendance"
+                        },
+                        "columns": [
+                            { "data": "strMarkDate" },
+                            { "data": "strInMarkTime" },
+                            { "data": "inLocName" },
+                            { "data": "inImageURL" },
+                            { "data": "strOutMarkTime" },
+                            { "data": "outLocName" },
+                            { "data": "outImageURL" },
+                        ],
+                        "columnDefs": [
+                             {
+                                 "render": function (data, type, row) {
+                                     return '<a data-toggle="modal" data-id="' + url + data + '" class="open-viewImageDialog" href="#viewImageDialog">View</a>';
+                                 },
+                                 "targets": 3
+                             },
+                        {
+                            "render": function (data, type, row) {
+                                return '<a data-toggle="modal" data-id="' + url + data + '" class="open-viewImageDialog" href="#viewImageDialog">View</a>';
+                            },
+                            "targets": 6
+                        }
+                        ]
+                    });
+                });
+
+                $(document).on("click", ".open-viewImageDialog", function () {
+                    var myimageId = $(this).data('id');
+                    $(".modal-body #imageId").attr('src', myimageId);
+                });
+
+            </script>
+
+            
+
+        </div>
+    </div>
+
+  
+
+   
 
 </body>
 </html>

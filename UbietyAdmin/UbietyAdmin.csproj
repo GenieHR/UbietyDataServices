@@ -277,6 +277,7 @@
     <Content Include="css\plugins\sweetalert\sweetalert.css" />
     <Content Include="css\plugins\switchery\switchery.css" />
     <Content Include="css\plugins\toastr\toastr.min.css" />
+    <Content Include="css\spinners.css" />
     <Content Include="css\style.css" />
     <Content Include="dashboard.aspx" />
     <Content Include="dashboard.html" />
