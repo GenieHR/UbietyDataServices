@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table id="jsonTable" border="1">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Place</th>
+        </tr>
+
+    </table>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    
+    <script>
+
+        var orgJSON = [
+                       { "date": "27/07/2015", "time": "10:20", "place": "main", "span": "0" },
+                       { "date": "28/07/2015", "time": "12:30", "place": "ncm", "span": "0" },
+                       { "date": "29/07/2015", "time": "16:40", "place": "p1", "span": "0" },
+                       { "date": "30/07/2015", "time": "09:45", "place": "main", "span": "0" },
+                       { "date": "31/07/2015", "time": "17:45", "place": "khar", "span": "0" },
+                       { "date": "01/08/2015", "time": "10:45", "place": "p1", "span": "0" }
+        ];
+
+        var spancount = 1;
+        var i;
+
+        for (i = 0; i < orgJSON.length-1; i++) {
+            if (orgJSON[i].date == orgJSON[i + 1].date) {
+                spancount++;
+            }
+            else {
+                if (spancount > 1){
+                    orgJSON[i - spancount + 1].span = spancount;
+                    spancount = 1;
+                }
+            }
+        }
+
+        if (spancount > 1) {
+            orgJSON[orgJSON.length - spancount].span = spancount;
+        }
+
+        var rowStr = '';
+        var curSpanCount = 1;
+
+        for (i = 0; i < orgJSON.length; i++)
+        {
+            rowStr = '<tr>';
+
+            if (orgJSON[i].span > 0)
+            {
+                rowStr += '<td rowspan = "' + orgJSON[i].span + '">' + orgJSON[i].date + '</td>';
+                spancount = orgJSON[i].span;
+                curSpanCount = 1;
+            }
+            else
+            {
+                curSpanCount++;
+
+                if (curSpanCount > spancount) {
+                    rowStr += '<td>' + orgJSON[i].date + '</td>';
+                }
+            }
+
+            rowStr += '<td>' + orgJSON[i].time + '</td>';
+            rowStr += '<td>' + orgJSON[i].place + '</td>';
+
+            rowStr += '</tr>';
+
+            $("#jsonTable > tbody").append(rowStr);
+        }
+
+    </script>
+</body>
+</html>
