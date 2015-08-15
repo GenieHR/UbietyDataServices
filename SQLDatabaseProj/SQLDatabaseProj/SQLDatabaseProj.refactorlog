@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="b7f79531-7363-4a67-aa24-8a2b8cd449ad" ChangeDateTime="07/15/2015 18:50:55">
+    <Property Name="ElementName" Value="[dbo].[Employee].[FirstName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Employee]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FullName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8f8dd71e-8862-4150-992a-7f299d309ede" ChangeDateTime="07/15/2015 18:51:37">
+    <Property Name="ElementName" Value="[dbo].[Employee].[Address]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Employee]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Address1" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0435f0c0-bdb9-4a61-90b8-e90b6ab97551" ChangeDateTime="07/17/2015 07:44:46">
+    <Property Name="ElementName" Value="[dbo].[Attendance].[Flag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Attendance]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MarkFlag" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="544b2868-bba5-4747-b02e-9cae35a4c140" ChangeDateTime="07/17/2015 07:44:59">
+    <Property Name="ElementName" Value="[dbo].[Attendance].[Time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Attendance]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MarkTime" />
+  </Operation>
+</Operations>

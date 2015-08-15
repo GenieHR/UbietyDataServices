@@ -240,7 +240,10 @@
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         </div>--%>
                         <div class="modal-body">
-
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                             <div class="col-md-12 col-lg-12">
                                 <center>
                                     <img class="north" id="imageId" style="width:50%;height:50%" />
