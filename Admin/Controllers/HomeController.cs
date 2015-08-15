@@ -25,7 +25,7 @@ namespace Admin.Controllers
                 
                 var model = new EmpStatu
                 {
-                    EmpStatuses = allRows
+                    //EmpStatuses = allRows
                 };
             }
             return View();

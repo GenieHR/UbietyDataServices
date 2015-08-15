@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmpStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -287,8 +288,14 @@
     <Compile Include="Models\attendance_bak.cs">
       <DependentUpon>UbietyDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>UserRepo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>UserRepo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpClient.cs">
+      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>UbietyDBEntities.tt</DependentUpon>
@@ -307,6 +314,12 @@
       <DependentUpon>UbietyDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Organization.cs">
+      <DependentUpon>UserRepo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UbietyDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -357,6 +370,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ShowClients.aspx.cs">
+      <DependentUpon>ShowClients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowClients.aspx.designer.cs">
+      <DependentUpon>ShowClients.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="CreateEmployee.aspx.cs">
       <DependentUpon>CreateEmployee.aspx</DependentUpon>
@@ -398,6 +418,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\logo.png" />
+    <Content Include="img\logos\1.png" />
+    <Content Include="img\logos\2.png" />
+    <Content Include="img\logos\3.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\demo\chartjs-demo.js" />
@@ -494,6 +517,7 @@
     <Content Include="font-awesome\fonts\fontawesome-webfonte0a5.woff" />
     <Content Include="font-awesome\fonts\fontawesome-webfonte0a5.woff2" />
     <Content Include="CreateEmployee.aspx" />
+    <Content Include="ShowClients.aspx" />
     <Content Include="WebForm2.aspx" />
     <EntityDeploy Include="Models\UbietyDBEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

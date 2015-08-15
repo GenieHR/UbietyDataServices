@@ -90,6 +90,7 @@ namespace Admin.Controllers
             
             if (result.Succeeded)
             {
+                employee.AuthUserId = user.Id;
                 db.Employees.Add(employee);
                 db.SaveChanges() ;
             }

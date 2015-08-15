@@ -31,5 +31,7 @@ namespace Admin.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Organization> Organizations { get; set; }
     }
 }

@@ -22,6 +22,8 @@
         <AssociationConnector Association="ubietydbModel.FK_Employee_EmpStatus" ManuallyRouted="false" />
         <AssociationConnector Association="ubietydbModel.FK_Login_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="ubietydbModel.FK_EntityAddresses_EntityType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ubietydbModel.EmpClient" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ubietydbModel.Role" Width="1.5" PointX="2.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

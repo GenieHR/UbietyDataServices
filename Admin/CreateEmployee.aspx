@@ -162,6 +162,11 @@
                                     <div class="col-sm-10"><input type="email" name="email" id="email" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Designation</label>
+
+                                    <div class="col-sm-10"><input type="text" name="designation" id="designation" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
                                 <br />
                                 <div class="text-center"><button class="btn btn-primary " id="submitButton" name="submitButton" type="submit"><i class="fa fa-check"></i>&nbsp;Add Employee</button></div>
                                 </form>
@@ -209,7 +214,7 @@
                      
                      $('#submitButton').prop('disabled', true);
 
-                     var posting = $.post('api/Employees', { empnum: $('#empnum').val(), empname: $('#empname').val(), empstatus: 1, email: $('#email').val(), primarymobile: $('#mobile').val() });
+                     var posting = $.post('api/Employees', { designation: $('#designation').val(), empnum: $('#empnum').val(), empname: $('#empname').val(), empstatus: 1, email: $('#email').val(), primarymobile: $('#mobile').val() });
 
                      posting.done(function (data) {
                          if (data.EmpId == 0) {

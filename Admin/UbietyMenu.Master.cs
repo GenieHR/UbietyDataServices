@@ -14,9 +14,22 @@ namespace Admin
     public partial class UbietyMenu : System.Web.UI.MasterPage
     {
         public String loggedinuser = "";
+        public String designation = "";
+        public int roleId;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-             loggedinuser = Page.User.Identity.Name;
+            String str = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            using (var context = new ubietydbEntities())
+            {
+                 var employee = context.Employees
+                    .Where(b => b.AuthUserId.Equals(str)) 
+                    .FirstOrDefault();
+
+                 loggedinuser = employee.EmpName;
+                 designation = employee.Designation;
+                 roleId = employee.RoleId.HasValue?employee.RoleId.Value:0;
+            }
         }
     }
 }

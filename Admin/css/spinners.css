@@ -93,7 +93,7 @@
 
 /**
  * Demo elements.
- */
+ 
 .box {
     margin:  1em 0;
     padding: 2em;
@@ -118,9 +118,9 @@
     border: none;
     padding: 1em 2em;
     border-radius: 3px;
-
+}
     .spinner {
         margin-right: 3px;
     }
-
+*/
 }

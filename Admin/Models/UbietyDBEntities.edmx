@@ -61,6 +61,14 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="AttendanceFlagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FlagName" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="EmpClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmpId" />
@@ -70,9 +78,12 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="EmpName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProfilePic" Type="nvarchar" MaxLength="100" />
           <Property Name="EmpStatus" Type="int" Nullable="false" />
-          <Property Name="ClientId" Type="int" />
+          <Property Name="RoleId" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="PrimaryMobile" Type="bigint" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" />
+          <Property Name="AuthUserId" Type="varchar" MaxLength="255" />
+          <Property Name="CompanyId" Type="int" />
         </EntityType>
         <EntityType Name="EmpStatus">
           <Key>
@@ -105,6 +116,13 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmpId" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_AddressType">
           <End Role="AddressType" Type="Self.AddressType" Multiplicity="1" />
@@ -195,11 +213,13 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <EntitySet Name="AddressType" EntityType="Self.AddressType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AttendanceFlag" EntityType="Self.AttendanceFlag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpClient" EntityType="Self.EmpClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpStatus" EntityType="Self.EmpStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EntityAddresses" EntityType="Self.EntityAddresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EntityType" EntityType="Self.EntityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="attendance_bak" EntityType="Self.attendance_bak" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [attendance_bak].[AttendanceId] AS [AttendanceId], 
@@ -299,12 +319,15 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="EmpName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProfilePic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EmpStatus" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrimaryMobile" Type="Int64" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="EmpStatu" Relationship="Self.FK_Employee_EmpStatus" FromRole="Employee" ToRole="EmpStatus" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AuthUserId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" />
         </EntityType>
         <EntityType Name="EmpStatu">
           <Key>
@@ -480,7 +503,24 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
             <End Role="EntityType" EntitySet="EntityTypes" />
             <End Role="EntityAddresses" EntitySet="EntityAddresses" />
           </AssociationSet>
+          <EntitySet Name="EmpClients" EntityType="ubietydbModel.EmpClient" />
+          <EntitySet Name="Roles" EntityType="ubietydbModel.Role" />
         </EntityContainer>
+        <EntityType Name="EmpClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -534,12 +574,15 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ubietydbModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AuthUserId" ColumnName="AuthUserId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
                 <ScalarProperty Name="EmpStatus" ColumnName="EmpStatus" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PrimaryMobile" ColumnName="PrimaryMobile" />
               </MappingFragment>
@@ -591,6 +634,23 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="markcount" ColumnName="markcount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpClients">
+            <EntityTypeMapping TypeName="ubietydbModel.EmpClient">
+              <MappingFragment StoreEntitySet="EmpClient">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ubietydbModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

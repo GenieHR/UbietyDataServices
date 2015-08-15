@@ -35,5 +35,7 @@ namespace Admin.Models
         public virtual DbSet<EntityType> EntityTypes { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<attendance_bak> attendance_bak { get; set; }
+        public virtual DbSet<EmpClient> EmpClients { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            //if (!roleManager.RoleExists("OrgEmployee"))
-            //    roleManager.Create(new IdentityRole("OrgEmployee"));
+           // var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+           // if (!roleManager.RoleExists("SuperAdmin"))
+           // roleManager.Create(new IdentityRole("SuperAdmin"));
         }
 
         protected override void OnInit(EventArgs e)

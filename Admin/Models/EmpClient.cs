@@ -12,16 +12,10 @@ namespace Admin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpStatu
+    public partial class EmpClient
     {
-        public EmpStatu()
-        {
-            this.Employees = new HashSet<Employee>();
-        }
-    
-        public int EmpStatusId { get; set; }
-        public string StatusName { get; set; }
-    
-        public virtual ICollection<Employee> Employees { get; set; }
+        public int Id { get; set; }
+        public int EmpId { get; set; }
+        public int ClientId { get; set; }
     }
 }
