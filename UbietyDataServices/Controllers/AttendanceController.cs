@@ -81,5 +81,24 @@ namespace UbietyDataServices.Controllers
 
             return new { attendance = abc };
         }
+
+        [Route("of/temp/{id}")]
+        [HttpGet]
+        public dynamic getAttendances(int id)
+        {
+            var context = new ubietydbEntities();
+            context.Configuration.ProxyCreationEnabled = false;
+
+            var abc = (from recordset in context.attRepTemp1
+                       where recordset.empid == id
+                       select recordset);
+
+            return  abc ;
+
+
+        }
+
     }
+
+
 }

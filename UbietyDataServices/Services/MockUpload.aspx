@@ -5,6 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -13,5 +18,8 @@
         <img src="https://ghrstorage.blob.core.windows.net/ubiety/EMP001/2015/07/20/AM" style="height:150px; Width:100px" />
     </div>
     </form>
+    
+
+    
 </body>
 </html>

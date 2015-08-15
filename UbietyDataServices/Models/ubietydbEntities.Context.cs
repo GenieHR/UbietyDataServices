@@ -35,5 +35,6 @@ namespace UbietyDataServices.Models
         public DbSet<EntityType> EntityTypes { get; set; }
         public DbSet<Login> Logins { get; set; }
         public DbSet<attendancereport> attendancereports { get; set; }
+        public DbSet<attRepTemp1> attRepTemp1 { get; set; }
     }
 }

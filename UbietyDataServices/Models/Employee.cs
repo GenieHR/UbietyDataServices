@@ -24,9 +24,9 @@ namespace UbietyDataServices.Models
         public string EmpName { get; set; }
         public string ProfilePic { get; set; }
         public int EmpStatus { get; set; }
-        public Nullable<int> ClientId { get; set; }
         public string Email { get; set; }
         public Nullable<long> PrimaryMobile { get; set; }
+        public Nullable<int> RoleId { get; set; }
     
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual EmpStatu EmpStatu { get; set; }

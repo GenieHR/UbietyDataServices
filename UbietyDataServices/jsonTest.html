@@ -19,63 +19,86 @@
     
     <script>
 
-        var orgJSON = [
-                       { "date": "27/07/2015", "time": "10:20", "place": "main", "span": "0" },
-                       { "date": "28/07/2015", "time": "12:30", "place": "ncm", "span": "0" },
-                       { "date": "29/07/2015", "time": "16:40", "place": "p1", "span": "0" },
-                       { "date": "30/07/2015", "time": "09:45", "place": "main", "span": "0" },
-                       { "date": "31/07/2015", "time": "17:45", "place": "khar", "span": "0" },
-                       { "date": "01/08/2015", "time": "10:45", "place": "p1", "span": "0" }
-        ];
-
-        var spancount = 1;
-        var i;
-
-        for (i = 0; i < orgJSON.length-1; i++) {
-            if (orgJSON[i].date == orgJSON[i + 1].date) {
-                spancount++;
-            }
-            else {
-                if (spancount > 1){
-                    orgJSON[i - spancount + 1].span = spancount;
-                    spancount = 1;
-                }
-            }
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
-        if (spancount > 1) {
-            orgJSON[orgJSON.length - spancount].span = spancount;
-        }
+        var profileURL2 = "api/attendance/of/temp/17";
 
-        var rowStr = '';
-        var curSpanCount = 1;
+        var orgJSON;
+        $.getJSON(profileURL2, function (result) {
+            orgJSON = result;
 
-        for (i = 0; i < orgJSON.length; i++)
-        {
-            rowStr = '<tr>';
+            var spancount = 1;
+            var i, q;
 
-            if (orgJSON[i].span > 0)
-            {
-                rowStr += '<td rowspan = "' + orgJSON[i].span + '">' + orgJSON[i].date + '</td>';
-                spancount = orgJSON[i].span;
-                curSpanCount = 1;
-            }
-            else
-            {
-                curSpanCount++;
+            q = 0;
 
-                if (curSpanCount > spancount) {
-                    rowStr += '<td>' + orgJSON[i].date + '</td>';
+            if (orgJSON.length >= 2) {
+                if (orgJSON[0].MarkDate != orgJSON[1].MarkDate) {
+                    orgJSON[0].span = 0;
+                    q = 1;
                 }
             }
 
-            rowStr += '<td>' + orgJSON[i].time + '</td>';
-            rowStr += '<td>' + orgJSON[i].place + '</td>';
+            for (i = q; i < orgJSON.length - 1; i++) {
+                if (orgJSON[i].MarkDate == orgJSON[i + 1].MarkDate) {
+                    spancount++;
+                }
+                else {
+                    if (spancount > 1){
+                        orgJSON[i - spancount + 1].span = spancount;
+                        spancount = 1;
+                    }
+                }
+            }
 
-            rowStr += '</tr>';
+            if (spancount > 1) {
+                orgJSON[orgJSON.length - spancount].span = spancount;
+            }
 
-            $("#jsonTable > tbody").append(rowStr);
-        }
+            var rowStr = '';
+            var curSpanCount = 1;
+
+            for (i = 0; i < orgJSON.length; i++)
+            {
+                rowStr = '<tr>';
+
+                if (q == 1) {
+                    rowStr += '<td>' + orgJSON[0].MarkDate + '</td>';
+                    q = 0;
+                }
+
+                if (orgJSON[i].span > 0)
+                {
+                    rowStr += '<td rowspan = "' + orgJSON[i].span + '">' + orgJSON[i].MarkDate + '</td>';
+                    spancount = orgJSON[i].span;
+                    curSpanCount = 1;
+                }
+                else
+                {
+                    curSpanCount++;
+
+                    if (curSpanCount > spancount) {
+                        rowStr += '<td>' + orgJSON[i].MarkDate + '</td>';
+                    }
+                }
+
+                rowStr += '<td>' + orgJSON[i].MarkTime + '</td>';
+                rowStr += '<td>' + orgJSON[i].Coordinates + '</td>';
+
+                rowStr += '</tr>';
+
+                $("#jsonTable > tbody").append(rowStr);
+            }
+        });
+
+        
+
+        
 
     </script>
 </body>

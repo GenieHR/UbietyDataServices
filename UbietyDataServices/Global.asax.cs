@@ -14,8 +14,10 @@ namespace UbietyDataServices
 
     public class WebApiApplication : System.Web.HttpApplication
     {
+        
         protected void Application_Start()
         {
+
             // This is required if you use XML serialization
             var xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
             xml.UseXmlSerializer = true;

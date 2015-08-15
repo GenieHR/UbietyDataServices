@@ -54,7 +54,7 @@
           <Property Name="EmpName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProfilePic" Type="nvarchar" MaxLength="100" />
           <Property Name="EmpStatus" Type="int" Nullable="false" />
-          <Property Name="ClientId" Type="int" />
+          <Property Name="RoleId" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="PrimaryMobile" Type="bigint" />
         </EntityType>
@@ -103,6 +103,20 @@ warning 6002: The table/view 'ubietydb.dbo.attendancereport' does not have a pri
           <Property Name="outlongitude" Type="float" />
           <Property Name="inmarktime" Type="datetime" />
           <Property Name="outmarktime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="attRepTemp">
+          <Key>
+            <PropertyRef Name="attendanceid" />
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="attendanceid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empid" Type="int" Nullable="false" />
+          <Property Name="MarkDate" Type="char" MaxLength="10" />
+          <Property Name="MarkTime" Type="char" MaxLength="5" />
+          <Property Name="Coordinates" Type="nvarchar" MaxLength="61" />
+          <Property Name="MarkCount" Type="int" />
         </EntityType>
         <Association Name="FK_Address_AddressType">
           <End Role="AddressType" Type="Self.AddressType" Multiplicity="1" />
@@ -209,6 +223,16 @@ warning 6002: The table/view 'ubietydb.dbo.attendancereport' does not have a pri
 [attendancereport].[outmarktime] AS [outmarktime]
 FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="attRepTemp" EntityType="Self.attRepTemp" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[attRepTemp].[attendanceid] AS [attendanceid], 
+[attRepTemp].[empid] AS [empid], 
+[attRepTemp].[MarkDate] AS [MarkDate], 
+[attRepTemp].[MarkTime] AS [MarkTime], 
+[attRepTemp].[Coordinates] AS [Coordinates], 
+[attRepTemp].[MarkCount] AS [MarkCount]
+FROM [dbo].[attRepTemp] AS [attRepTemp]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
             <End Role="AddressType" EntitySet="AddressType" />
             <End Role="Address" EntitySet="Address" />
@@ -297,12 +321,12 @@ FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
           <Property Name="EmpName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProfilePic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EmpStatus" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PrimaryMobile" Type="Int64" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="EmpStatu" Relationship="Self.FK_Employee_EmpStatus" FromRole="Employee" ToRole="EmpStatus" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
+          <Property Name="RoleId" Type="Int32" />
         </EntityType>
         <EntityType Name="EmpStatu">
           <Key>
@@ -464,6 +488,7 @@ FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
             <End Role="EntityAddresses" EntitySet="EntityAddresses" />
           </AssociationSet>
           <EntitySet Name="attendancereports" EntityType="ubietydbModel.attendancereport" />
+          <EntitySet Name="attRepTemp1" EntityType="ubietydbModel.attRepTemp1" />
         </EntityContainer>
         <EntityType Name="attendancereport">
           <Key>
@@ -476,6 +501,18 @@ FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
           <Property Name="outlongitude" Type="Double" />
           <Property Name="inmarktime" Type="DateTime" Precision="3" />
           <Property Name="outmarktime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="attRepTemp1">
+          <Key>
+            <PropertyRef Name="attendanceid" />
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="attendanceid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empid" Type="Int32" Nullable="false" />
+          <Property Name="MarkDate" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MarkTime" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Coordinates" Type="String" MaxLength="61" FixedLength="false" Unicode="true" />
+          <Property Name="MarkCount" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -530,12 +567,12 @@ FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ubietydbModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
                 <ScalarProperty Name="EmpStatus" ColumnName="EmpStatus" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PrimaryMobile" ColumnName="PrimaryMobile" />
               </MappingFragment>
@@ -587,6 +624,18 @@ FROM [dbo].[attendancereport] AS [attendancereport]</DefiningQuery>
                 <ScalarProperty Name="outlatitude" ColumnName="outlatitude" />
                 <ScalarProperty Name="inlatitude" ColumnName="inlatitude" />
                 <ScalarProperty Name="empid" ColumnName="empid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attRepTemp1">
+            <EntityTypeMapping TypeName="ubietydbModel.attRepTemp1">
+              <MappingFragment StoreEntitySet="attRepTemp">
+                <ScalarProperty Name="MarkCount" ColumnName="MarkCount" />
+                <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
+                <ScalarProperty Name="MarkTime" ColumnName="MarkTime" />
+                <ScalarProperty Name="MarkDate" ColumnName="MarkDate" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+                <ScalarProperty Name="attendanceid" ColumnName="attendanceid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

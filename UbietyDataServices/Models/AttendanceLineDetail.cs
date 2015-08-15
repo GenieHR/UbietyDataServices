@@ -55,12 +55,29 @@ namespace UbietyDataServices.Models
 
         public String strOutMarkTime
         {
-            get { return string.Format("{0:00}:{1:00}", outMarkTime.Value.Hour, outMarkTime.Value.Minute); }
+            get
+            {
+                if (outMarkTime.HasValue)
+                {
+                    return string.Format("{0:00}:{1:00}", outMarkTime.Value.Hour, outMarkTime.Value.Minute);
+                }
+                else
+                {
+                    return "";
+                }
+            }
             set { int abc = 1; }
         }
         public String outImageURL
         {
-            get { return string.Format("{4}/{0}/{1:00}/{2:00}/{3}", outMarkTime.Value.Year, outMarkTime.Value.Month, outMarkTime.Value.Day, outMarkCount, empId); }
+            get {
+                if (outMarkTime.HasValue)
+                {
+                    return string.Format("{4}/{0}/{1:00}/{2:00}/{3}", outMarkTime.Value.Year, outMarkTime.Value.Month, outMarkTime.Value.Day, outMarkCount, empId);
+                }
+                else
+                { return ""; }
+            }
             set { int abc = 2; }
         }
 
@@ -86,6 +103,10 @@ namespace UbietyDataServices.Models
         {
             get
             {
+                if (outCoordinates.Equals(","))
+                {
+                    return "";
+                }
                 String result = "Unable to Find Location";
                 XmlDocument doc = new XmlDocument();
                 doc = getXMLDoc(outCoordinates);

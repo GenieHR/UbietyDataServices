@@ -26,7 +26,7 @@ namespace UbietyDataServices.Controllers
             context.Configuration.ProxyCreationEnabled = false;
 
             var dataset2 = (from recordset in context.Employees
-                            where recordset.EmpNum == empnum && recordset.Email == email && recordset.PrimaryMobile == mobileno
+                            where recordset.EmpNum.ToUpper() == empnum.ToUpper() && recordset.Email.ToUpper() == email.ToUpper() && recordset.PrimaryMobile == mobileno
                             select new EmployeeDTO
                             {
                                 EmpId = recordset.EmpId,
@@ -60,6 +60,27 @@ namespace UbietyDataServices.Controllers
                             });
             return dataset2;
 
+        }
+
+        [Route("GetEmpDetail/of/{id}")]
+        [HttpGet]
+        public dynamic GetEmpDetailsOf(int id)
+        {
+            var context = new ubietydbEntities();
+            context.Configuration.ProxyCreationEnabled = false;
+
+            var dataset2 = (from recordset in context.Employees
+                            where recordset.EmpId == id 
+                            select new EmployeeDTO
+                            {
+                                EmpId = recordset.EmpId,
+                                EmpNum = recordset.EmpNum,
+                                EmpName = recordset.EmpName,
+                                Email = recordset.Email,
+                                MobileNum = recordset.PrimaryMobile,
+                                ProfilePicURL = recordset.ProfilePic
+                            });
+            return new { employee = dataset2 };
         }
     }
 }

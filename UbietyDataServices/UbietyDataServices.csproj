@@ -212,6 +212,9 @@
     <Compile Include="Models\attendancereport.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\attRepTemp1.cs">
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DocumentBuilder.cs" />
     <Compile Include="Models\DocumentBuilderFactory.cs" />
     <Compile Include="Models\Employee.cs">
@@ -335,6 +338,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="jsonTest.html" />
     <Content Include="Services\MockUpload.aspx" />
     <Content Include="Services\photoupload.aspx" />
     <Content Include="obj\favicon.ico" />
