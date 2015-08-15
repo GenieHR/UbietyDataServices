@@ -1,10 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");
-/*
- *
- *   INSPINIA - Responsive Admin Theme
- *   version 2.2
- *
-*/
+
 h1,
 h2,
 h3,
@@ -3235,7 +3230,7 @@ video {
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  outline: 0 none;
+  outline: inset none;
   position: relative;
 }
 .modal-dialog {

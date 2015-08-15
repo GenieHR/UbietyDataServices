@@ -235,7 +235,7 @@
                                     <input type="button" value="Rotate" />
                                 </center>
                             </div>
-
+                            <span id="spanidd"></span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -304,7 +304,6 @@
                 var profileURL = "http://ubietyapi.azurewebsites.net/api/attendance/of/" + getParameterByName('EmpId');
                 var profileURL2 = "http://ubietyapi.azurewebsites.net/api/employees/getempdetail/of/" + getParameterByName('EmpId') + '?jsoncallback=?';
                 var empJson = "";
-                var url = "https://ghrstorage.blob.core.windows.net/ubiety/";
 
 
                 function getParameterByName(name) {
@@ -377,7 +376,9 @@
 
                 $(document).on("click", ".open-viewImageDialog", function () {
                     var myimageId = $(this).data('id');
-                    $(".modal-body #imageId").attr('src', myimageId);
+                    var url = "https://ghrstorage.blob.core.windows.net/ubiety/";
+                    alert(url + myimageId);
+                    $(".modal-body #imageId").attr('src', url + myimageId);
                 });
 
             </script>

@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Admin.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using System.Web.Configuration;
 
 namespace Admin.Controllers
 {
@@ -79,15 +82,24 @@ namespace Admin.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Employees.Add(employee);
-            db.SaveChanges();
+            var userStore = new UserStore<IdentityUser>();
+            var manager = new UserManager<IdentityUser>(userStore);
 
+            var user = new IdentityUser() { UserName = employee.Email, Email = employee.Email, PhoneNumber = employee.PrimaryMobile.ToString() };
+            IdentityResult result = manager.Create(user, WebConfigurationManager.AppSettings["DefaultPassword"]);
+            
+            if (result.Succeeded)
+            {
+                db.Employees.Add(employee);
+                db.SaveChanges() ;
+            }
+            else
+            {
+
+            }
+            
             return CreatedAtRoute("DefaultApi", new { id = employee.EmpId }, employee);
         }
-
-
-
-
 
         // DELETE: api/Employees/5
         [ResponseType(typeof(Employee))]

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <span id="spanId">Loading...</span>
+    <script>
+        Number.prototype.toRad = function () {
+            return this * Math.PI / 180;
+        }
+
+        Number.prototype.toDeg = function () {
+            return this * 180 / Math.PI;
+        }
+
+        google.maps.LatLng.prototype.destinationPoint = function (brng, dist) {
+            dist = dist / 6371;
+            brng = brng.toRad();
+
+            var lat1 = this.lat().toRad(), lon1 = this.lng().toRad();
+
+            var lat2 = Math.asin(Math.sin(lat1) * Math.cos(dist) +
+                                 Math.cos(lat1) * Math.sin(dist) * Math.cos(brng));
+
+            var lon2 = lon1 + Math.atan2(Math.sin(brng) * Math.sin(dist) *
+                                         Math.cos(lat1),
+                                         Math.cos(dist) - Math.sin(lat1) *
+                                         Math.sin(lat2));
+
+            if (isNaN(lat2) || isNaN(lon2)) return null;
+
+            return new google.maps.LatLng(lat2.toDeg(), lon2.toDeg());
+        }
+
+        var pointA = new google.maps.LatLng(32.681100547217554, 74.8838681264615);
+        var radiusInKm = 1;
+        var pointB = pointA.destinationPoint(90, radiusInKm);
+
+        getLocation(pointA);
+
+        function getLocation(info) {
+            
+            var myCenter = info; //new google.maps.LatLng(info.split(",", 3)[1], info.split(",", 3)[2]);
+            var gc = new google.maps.Geocoder();
+
+            gc.geocode({ 'location': myCenter }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        document.getElementById('spanId').innerHTML = results[1].formatted_address + ' ';
+                        document.getElementById('a' + info.split(",", 3)[0]).remove();
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+
+                    document.getElementById('spanId').innerHTML = 'Geocoder failed due to: ' + status + ' ';
+                    
+                }
+            });
+        }
+
+
+    </script>
+</body>
+</html>

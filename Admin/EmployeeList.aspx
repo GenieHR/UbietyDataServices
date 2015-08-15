@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmployeeList.aspx.cs" Inherits="UbietyAdmin.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeBehind="EmployeeList.aspx.cs" Inherits="UbietyAdmin.WebForm1" %>
+
+
 
 <!DOCTYPE html>
 
@@ -22,7 +24,15 @@
     <title>Employee List</title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form method="post" action="employeelist.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="BnDNz1kR8JeC54qd4zYdOzxoQMWvbH7rY6f+jkyL6dr99IthGkJsoRUTZJVCXh4LFQQYXTIpuNyfcUb4bdC3+2+txrB1EWQMsYPniosAaDk=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="3FE3250D" />
+</div>
     <div class="container">
     
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -83,44 +93,44 @@
     
 <script>
 
-    
-        $(document).ready(function () {
 
-            var table = $('#regionsdt').DataTable({
-                "retrieve": true,
-                "bPaginate": true,
-                "bJQueryUI": true,  
-                "bLengthChange": false,
-                "bFilter": true,
-                "bSort": true,
-                "bInfo": true,
-                "bAutoWidth": false,
-                "bProcessing": false,
-                "iDisplayLength": 30,
-                "ajax": {
-                    "url": "http://ubietyapi.azurewebsites.net/api/employees/GetEmpDetails",
-                    "dataSrc": ""
-                },
-                "columns": [
-                    { "data": "EmpId" },
-                    { "data": "EmpNum" },
-                    { "data": "EmpName" },
-                    { "data": "Email" },
-                    { "data": "MobileNum" }
-                ],
-                "columnDefs": [
-            {
-                // The `data` parameter refers to the data for the cell (defined by the
-                // `data` option, which defaults to the column being worked with, in
-                // this case `data: 0`.
+    $(document).ready(function () {
 
-                "render": function (data, type, row) {
-                    return '<a  href="profile_new.aspx?EmpId=' + data + '">' + 'View' + '</a>';
-                },
-                "targets": 0
-            }
-                ]
-            });
+        var table = $('#regionsdt').DataTable({
+            "retrieve": true,
+            "bPaginate": true,
+            "bJQueryUI": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false,
+            "bProcessing": false,
+            "iDisplayLength": 30,
+            "ajax": {
+                "url": "http://ubietyapi.azurewebsites.net/api/employees/GetEmpDetails",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "EmpId" },
+                { "data": "EmpNum" },
+                { "data": "EmpName" },
+                { "data": "Email" },
+                { "data": "MobileNum" }
+            ],
+            "columnDefs": [
+        {
+            // The `data` parameter refers to the data for the cell (defined by the
+            // `data` option, which defaults to the column being worked with, in
+            // this case `data: 0`.
+
+            "render": function (data, type, row) {
+                return '<a  href="profile_new.aspx?EmpId=' + data + '">' + 'View' + '</a>';
+            },
+            "targets": 0
+        }
+            ]
+        });
     });
 
 
