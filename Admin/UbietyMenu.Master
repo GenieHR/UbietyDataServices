@@ -24,7 +24,7 @@
 
     <link href="css/animate.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
-    
+
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -71,6 +71,8 @@
             </form>
         </div>
            <ul class="nav navbar-top-links navbar-right">
+                
+                
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
@@ -123,8 +125,7 @@
         </nav>
         </div>
         <asp:ContentPlaceHolder   ID="body" runat="server" />
-</div>
-</div>
+
       <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
