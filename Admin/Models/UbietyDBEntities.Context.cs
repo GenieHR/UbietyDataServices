@@ -40,6 +40,7 @@ namespace Admin.Models
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<attendance_bak> attendance_bak { get; set; }
+        public virtual DbSet<test_att> test_att { get; set; }
         public virtual DbSet<attendancereport> attendancereports { get; set; }
         public virtual DbSet<attRepTemp> attRepTemps { get; set; }
     }

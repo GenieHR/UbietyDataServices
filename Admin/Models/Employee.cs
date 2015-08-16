@@ -17,6 +17,7 @@ namespace Admin.Models
         public Employee()
         {
             this.Attendances = new HashSet<Attendance>();
+            this.ClaimHeads = new HashSet<ClaimHead>();
         }
     
         public int EmpId { get; set; }

@@ -171,6 +171,22 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ubietydb.dbo.test_att' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="test_att">
+          <Key>
+            <PropertyRef Name="AttendanceId" />
+            <PropertyRef Name="EmpId" />
+            <PropertyRef Name="MarkTime" />
+          </Key>
+          <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="MarkFlagId" Type="int" />
+          <Property Name="MarkTime" Type="datetime" Nullable="false" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="markcount" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ubietydb.dbo.attendancereport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="attendancereport">
           <Key>
@@ -355,6 +371,17 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
     [attendance_bak].[longitude] AS [longitude], 
     [attendance_bak].[markcount] AS [markcount]
     FROM [dbo].[attendance_bak] AS [attendance_bak]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="test_att" EntityType="Self.test_att" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [test_att].[AttendanceId] AS [AttendanceId], 
+    [test_att].[EmpId] AS [EmpId], 
+    [test_att].[MarkFlagId] AS [MarkFlagId], 
+    [test_att].[MarkTime] AS [MarkTime], 
+    [test_att].[latitude] AS [latitude], 
+    [test_att].[longitude] AS [longitude], 
+    [test_att].[markcount] AS [markcount]
+    FROM [dbo].[test_att] AS [test_att]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="attendancereport" EntityType="Self.attendancereport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -612,6 +639,20 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <Property Name="longitude" Type="Double" />
           <Property Name="markcount" Type="Int32" />
         </EntityType>
+        <EntityType Name="test_att">
+          <Key>
+            <PropertyRef Name="AttendanceId" />
+            <PropertyRef Name="EmpId" />
+            <PropertyRef Name="MarkTime" />
+          </Key>
+          <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="MarkFlagId" Type="Int32" />
+          <Property Name="MarkTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="markcount" Type="Int32" />
+        </EntityType>
         <EntityType Name="attendancereport">
           <Key>
             <PropertyRef Name="empid" />
@@ -784,6 +825,7 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <EntitySet Name="Logins" EntityType="Self.Login" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="attendance_bak" EntityType="Self.attendance_bak" />
+          <EntitySet Name="test_att" EntityType="Self.test_att" />
           <EntitySet Name="attendancereports" EntityType="Self.attendancereport" />
           <EntitySet Name="attRepTemps" EntityType="Self.attRepTemp" />
           <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
@@ -1001,6 +1043,19 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <EntitySetMapping Name="attendance_bak">
             <EntityTypeMapping TypeName="ubietydbModel.attendance_bak">
               <MappingFragment StoreEntitySet="attendance_bak">
+                <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="MarkFlagId" ColumnName="MarkFlagId" />
+                <ScalarProperty Name="MarkTime" ColumnName="MarkTime" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="markcount" ColumnName="markcount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_att">
+            <EntityTypeMapping TypeName="ubietydbModel.test_att">
+              <MappingFragment StoreEntitySet="test_att">
                 <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="MarkFlagId" ColumnName="MarkFlagId" />

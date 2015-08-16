@@ -273,10 +273,10 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressType.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>UserRepo.tt</DependentUpon>
@@ -294,28 +294,28 @@
       <DependentUpon>UserRepo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Attendance.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AttendanceFlag.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\attendancereport.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\attendance_bak.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\attRepTemp.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClaimHead.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClaimLine.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClaimStatu.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Client.cs">
       <DependentUpon>UserRepo.tt</DependentUpon>
@@ -324,45 +324,48 @@
       <DependentUpon>UserRepo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpClient.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpStatu.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityAddress.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityType.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Organization.cs">
       <DependentUpon>UserRepo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UbietyDBEntities.Context.cs">
+    <Compile Include="Models\test_att.cs">
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ubietydbEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UbietyDBEntities.Context.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UbietyDBEntities.cs">
+    <Compile Include="Models\ubietydbEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UbietyDBEntities.Designer.cs">
+    <Compile Include="Models\ubietydbEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRepo.Context.cs">
       <AutoGen>True</AutoGen>
@@ -571,22 +574,22 @@
       <DependentUpon>UserRepo.edmx</DependentUpon>
       <LastGenOutput>UserRepo.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Models\UbietyDBEntities.edmx">
+    <EntityDeploy Include="Models\ubietydbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UbietyDBEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>ubietydbEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\UbietyDBEntities.Context.tt">
+    <Content Include="Models\ubietydbEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
-      <LastGenOutput>UbietyDBEntities.Context.cs</LastGenOutput>
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+      <LastGenOutput>ubietydbEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\UbietyDBEntities.edmx.diagram">
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
+    <Content Include="Models\ubietydbEntities.edmx.diagram">
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\UbietyDBEntities.tt">
+    <Content Include="Models\ubietydbEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
-      <LastGenOutput>UbietyDBEntities.cs</LastGenOutput>
+      <DependentUpon>ubietydbEntities.edmx</DependentUpon>
+      <LastGenOutput>ubietydbEntities.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\ubiety.pubxml" />
     <None Include="Properties\PublishProfiles\ubietyadmin.pubxml" />
