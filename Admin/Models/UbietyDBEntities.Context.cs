@@ -29,15 +29,18 @@ namespace Admin.Models
         public virtual DbSet<AddressType> AddressTypes { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<AttendanceFlag> AttendanceFlags { get; set; }
+        public virtual DbSet<ClaimHead> ClaimHeads { get; set; }
+        public virtual DbSet<ClaimLine> ClaimLines { get; set; }
+        public virtual DbSet<ClaimStatu> ClaimStatus { get; set; }
+        public virtual DbSet<EmpClient> EmpClients { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmpStatu> EmpStatus { get; set; }
         public virtual DbSet<EntityAddress> EntityAddresses { get; set; }
         public virtual DbSet<EntityType> EntityTypes { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
-        public virtual DbSet<EmpClient> EmpClients { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<ClaimHead> ClaimHeads { get; set; }
-        public virtual DbSet<ClaimLine> ClaimLines { get; set; }
-        public virtual DbSet<ClaimStatu> ClaimStatus { get; set; }
+        public virtual DbSet<attendance_bak> attendance_bak { get; set; }
+        public virtual DbSet<attendancereport> attendancereports { get; set; }
+        public virtual DbSet<attRepTemp> attRepTemps { get; set; }
     }
 }

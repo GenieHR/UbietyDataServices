@@ -299,6 +299,15 @@
     <Compile Include="Models\AttendanceFlag.cs">
       <DependentUpon>UbietyDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\attendancereport.cs">
+      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attendance_bak.cs">
+      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\attRepTemp.cs">
+      <DependentUpon>UbietyDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClaimHead.cs">
       <DependentUpon>UbietyDBEntities.tt</DependentUpon>
     </Compile>
@@ -545,23 +554,6 @@
     <Content Include="CreateEmployee.aspx" />
     <Content Include="ShowClients.aspx" />
     <Content Include="WebForm2.aspx" />
-    <EntityDeploy Include="Models\UbietyDBEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UbietyDBEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\UbietyDBEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
-      <LastGenOutput>UbietyDBEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\UbietyDBEntities.edmx.diagram">
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\UbietyDBEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
-      <LastGenOutput>UbietyDBEntities.cs</LastGenOutput>
-    </Content>
     <EntityDeploy Include="Models\UserRepo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UserRepo.Designer.cs</LastGenOutput>
@@ -578,6 +570,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UserRepo.edmx</DependentUpon>
       <LastGenOutput>UserRepo.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\UbietyDBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UbietyDBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UbietyDBEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
+      <LastGenOutput>UbietyDBEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UbietyDBEntities.edmx.diagram">
+      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\UbietyDBEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UbietyDBEntities.edmx</DependentUpon>
+      <LastGenOutput>UbietyDBEntities.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\ubiety.pubxml" />
     <None Include="Properties\PublishProfiles\ubietyadmin.pubxml" />

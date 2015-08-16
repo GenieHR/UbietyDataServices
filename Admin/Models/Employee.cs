@@ -32,8 +32,8 @@ namespace Admin.Models
         public Nullable<int> CompanyId { get; set; }
     
         public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual ICollection<ClaimHead> ClaimHeads { get; set; }
         public virtual EmpStatu EmpStatu { get; set; }
         public virtual Login Login { get; set; }
-        public virtual ICollection<ClaimHead> ClaimHeads { get; set; }
     }
 }
