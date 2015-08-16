@@ -78,7 +78,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="EmpName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ProfilePic" Type="nvarchar" MaxLength="100" />
           <Property Name="EmpStatus" Type="int" Nullable="false" />
-          <Property Name="RoleId" Type="int" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="PrimaryMobile" Type="bigint" />
           <Property Name="Designation" Type="varchar" MaxLength="50" />
@@ -324,7 +323,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
           <NavigationProperty Name="EmpStatu" Relationship="Self.FK_Employee_EmpStatus" FromRole="Employee" ToRole="EmpStatus" />
           <NavigationProperty Name="Login" Relationship="Self.FK_Login_Employee" FromRole="Employee" ToRole="Login" />
-          <Property Name="RoleId" Type="Int32" />
           <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AuthUserId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CompanyId" Type="Int32" />
@@ -577,7 +575,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="AuthUserId" ColumnName="AuthUserId" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />

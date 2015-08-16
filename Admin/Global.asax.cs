@@ -21,5 +21,12 @@ namespace Admin
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            Session["RoleId"] = 0;
+            Session["loggedinuserName"] = "";
+            Session["Designation"] = ""; 
+        }
     }
 }

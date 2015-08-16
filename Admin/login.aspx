@@ -39,13 +39,29 @@
 
                  </form>
                  </div>
+            
+            <br /><br />
+
+            <div id="notification"></div>
+            
         </div>
     </div>
 
     <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
 
+        if (getParameterByName('credentials') == "wrong") {
+            $("#notification").append('<div class="alert alert-danger">Wrong Credentials, Please try again.</div>');
+        }
+    </script>
 </body>
 
 

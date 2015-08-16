@@ -15,7 +15,7 @@ namespace Admin
 
             routes.MapRoute(
                 name: "Default",
-                url: "dashboard.aspx");
+                url: "login.aspx");
         }
     }
 }

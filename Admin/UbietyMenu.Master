@@ -39,8 +39,8 @@
                             <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%= loggedinuser %></strong>
-                             </span> <span class="text-muted text-xs block"><%= designation %> <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><%= Session["loggedinuserName"] %></strong>
+                             </span> <span class="text-muted text-xs block"><%= Session["Designation"] %> <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated m-t-xs">
                             <li><a href="#">Profile</a></li>
                             <li class="divider"></li>

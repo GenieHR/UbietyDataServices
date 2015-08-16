@@ -15,9 +15,61 @@ namespace Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           // var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-           // if (!roleManager.RoleExists("SuperAdmin"))
-           // roleManager.Create(new IdentityRole("SuperAdmin"));
+        
+        //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+        // if (!roleManager.RoleExists("SuperAdmin"))
+        //roleManager.Create(new IdentityRole("OrgAdmin"));
+        //roleManager.Create(new IdentityRole("OrgManager"));
+        //roleManager.Create(new IdentityRole("OrgEmployee"));
+        //roleManager.Create(new IdentityRole("ClientAdmin"));
+        //roleManager.Create(new IdentityRole("ClientManager"));
+        //roleManager.Create(new IdentityRole("ClientEmployee"));
+
+
+        //   DefaultConnection1 context = new DefaultConnection1();
+
+        //   var userStore = new UserStore<IdentityUser>();
+        //   var UserManager = new UserManager<IdentityUser>(userStore);
+
+        //try
+        //{
+        //    var user = UserManager.FindByName("dhimanamit81@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+            
+        //    user = UserManager.FindByName("Aamir.Red.devil@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("ramankchaudhary@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("akbar.zeeshan734@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("durai.civil2005@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("lahriimran@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+            
+        //    user = UserManager.FindByName("santhosh.enggcivil@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+            
+        //    user = UserManager.FindByName("civilengineer8118@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("erzahoor1343@gmail.com");
+        //    UserManager.AddToRole(user.Id, "ClientEmployee");
+
+        //    user = UserManager.FindByName("preeti.negi@geniehr.com");
+        //    UserManager.AddToRole(user.Id, "OrgEmployee");
+
+        //    user = UserManager.FindByName("laks@geniehr.com");
+        //    UserManager.AddToRole(user.Id, "SuperAdmin");
+        //}
+        //catch
+        //{
+        //    throw;
+        //}
         }
 
         protected override void OnInit(EventArgs e)
@@ -49,11 +101,11 @@ namespace Admin
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
 
                 if (Request.QueryString["ReturnUrl"] == null)
-                Response.Redirect("~/dashboard.aspx");
+                Response.Redirect("~/loggingin.aspx");
             }
             else
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Login.aspx?credentials=wrong");
             }
         }
     }

@@ -206,6 +206,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddClaim.aspx.cs">
+      <DependentUpon>AddClaim.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddClaim.aspx.designer.cs">
+      <DependentUpon>AddClaim.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -234,6 +241,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="loggingin.aspx.cs">
+      <DependentUpon>loggingin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="loggingin.aspx.designer.cs">
+      <DependentUpon>loggingin.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -401,6 +415,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddClaim.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\animate.css" />
@@ -503,6 +518,7 @@
     <Content Include="js\plugins\validate\jquery.validate.min.js" />
     <Content Include="js\plugins\video\responsible-video.js" />
     <Content Include="js\plugins\wow\wow.min.js" />
+    <Content Include="loggingin.aspx" />
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
     <Content Include="mapTest.html" />
