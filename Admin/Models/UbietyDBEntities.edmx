@@ -38,28 +38,59 @@
           <Property Name="longitude" Type="float" />
           <Property Name="markcount" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="attendance_bak">
-          <Key>
-            <PropertyRef Name="AttendanceId" />
-            <PropertyRef Name="EmpId" />
-            <PropertyRef Name="MarkTime" />
-          </Key>
-          <Property Name="AttendanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmpId" Type="int" Nullable="false" />
-          <Property Name="MarkFlagId" Type="int" />
-          <Property Name="MarkTime" Type="datetime" Nullable="false" />
-          <Property Name="latitude" Type="float" />
-          <Property Name="longitude" Type="float" />
-          <Property Name="markcount" Type="int" />
-        </EntityType>
         <EntityType Name="AttendanceFlag">
           <Key>
             <PropertyRef Name="AttendanceFlagId" />
           </Key>
           <Property Name="AttendanceFlagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FlagName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClaimHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="ClaimNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ClaimTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClaimLine">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaimId" />
+            <PropertyRef Name="ClaimLineId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClaimId" Type="int" Nullable="false" />
+          <Property Name="ClaimLineId" Type="int" Nullable="false" />
+          <Property Name="ClaimType" Type="int" Nullable="false" />
+          <Property Name="Purpose" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LocOut" Type="tinyint" Nullable="false" />
+          <Property Name="HotelName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="AccNoOfNights" Type="int" />
+          <Property Name="TravelFromPlace" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelToPlace" Type="nvarchar" MaxLength="255" />
+          <Property Name="TravelMode" Type="char" MaxLength="1" />
+          <Property Name="Distance" Type="float" />
+          <Property Name="Rate" Type="money" />
+          <Property Name="OtherClaimTypeDesc" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="money" Nullable="false" />
+          <Property Name="BillType" Type="tinyint" />
+          <Property Name="LineStatus" Type="int" Nullable="false" />
+          <Property Name="EmpRemarks" Type="nvarchar(max)" />
+          <Property Name="ManagerRemarks" Type="nvarchar(max)" />
+          <Property Name="OrgRemarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClaimStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="EmpClient">
           <Key>
@@ -159,6 +190,54 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClaimHead_ClaimStatus">
+          <End Role="ClaimStatus" Type="Self.ClaimStatus" Multiplicity="1" />
+          <End Role="ClaimHead" Type="Self.ClaimHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimHead">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimHead_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="ClaimHead" Type="Self.ClaimHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ClaimHead">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimLine_ClaimHead">
+          <End Role="ClaimHead" Type="Self.ClaimHead" Multiplicity="1" />
+          <End Role="ClaimLine" Type="Self.ClaimLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimHead">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClaimLine">
+              <PropertyRef Name="ClaimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimLine_ClaimStatus">
+          <End Role="ClaimStatus" Type="Self.ClaimStatus" Multiplicity="1" />
+          <End Role="ClaimLine" Type="Self.ClaimLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimLine">
+              <PropertyRef Name="LineStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_EmpStatus">
           <End Role="EmpStatus" Type="Self.EmpStatus" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -212,6 +291,9 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <EntitySet Name="AddressType" EntityType="Self.AddressType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AttendanceFlag" EntityType="Self.AttendanceFlag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClaimHead" EntityType="Self.ClaimHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClaimLine" EntityType="Self.ClaimLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClaimStatus" EntityType="Self.ClaimStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpClient" EntityType="Self.EmpClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpStatus" EntityType="Self.EmpStatus" Schema="dbo" store:Type="Tables" />
@@ -219,17 +301,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <EntitySet Name="EntityType" EntityType="Self.EntityType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="attendance_bak" EntityType="Self.attendance_bak" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [attendance_bak].[AttendanceId] AS [AttendanceId], 
-    [attendance_bak].[EmpId] AS [EmpId], 
-    [attendance_bak].[MarkFlagId] AS [MarkFlagId], 
-    [attendance_bak].[MarkTime] AS [MarkTime], 
-    [attendance_bak].[latitude] AS [latitude], 
-    [attendance_bak].[longitude] AS [longitude], 
-    [attendance_bak].[markcount] AS [markcount]
-    FROM [dbo].[attendance_bak] AS [attendance_bak]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
             <End Role="AddressType" EntitySet="AddressType" />
             <End Role="Address" EntitySet="Address" />
@@ -241,6 +312,22 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <AssociationSet Name="FK_Attendance_Employee" Association="Self.FK_Attendance_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimHead_ClaimStatus" Association="Self.FK_ClaimHead_ClaimStatus">
+            <End Role="ClaimStatus" EntitySet="ClaimStatus" />
+            <End Role="ClaimHead" EntitySet="ClaimHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimHead_Employee" Association="Self.FK_ClaimHead_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ClaimHead" EntitySet="ClaimHead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimLine_ClaimHead" Association="Self.FK_ClaimLine_ClaimHead">
+            <End Role="ClaimHead" EntitySet="ClaimHead" />
+            <End Role="ClaimLine" EntitySet="ClaimLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimLine_ClaimStatus" Association="Self.FK_ClaimLine_ClaimStatus">
+            <End Role="ClaimStatus" EntitySet="ClaimStatus" />
+            <End Role="ClaimLine" EntitySet="ClaimLine" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_EmpStatus" Association="Self.FK_Employee_EmpStatus">
             <End Role="EmpStatus" EntitySet="EmpStatus" />
@@ -326,6 +413,7 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AuthUserId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="ClaimHeads" Relationship="ubietydbModel.FK_ClaimHead_Employee" FromRole="Employee" ToRole="ClaimHead" />
         </EntityType>
         <EntityType Name="EmpStatu">
           <Key>
@@ -363,20 +451,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="EmpId" Type="Int32" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Login_Employee" FromRole="Login" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="attendance_bak">
-          <Key>
-            <PropertyRef Name="AttendanceId" />
-            <PropertyRef Name="EmpId" />
-            <PropertyRef Name="MarkTime" />
-          </Key>
-          <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmpId" Type="Int32" Nullable="false" />
-          <Property Name="MarkFlagId" Type="Int32" />
-          <Property Name="MarkTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="latitude" Type="Double" />
-          <Property Name="longitude" Type="Double" />
-          <Property Name="markcount" Type="Int32" />
         </EntityType>
         <Association Name="FK_Address_AddressType">
           <End Role="AddressType" Type="Self.AddressType" Multiplicity="1" />
@@ -472,7 +546,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <EntitySet Name="EntityAddresses" EntityType="Self.EntityAddress" />
           <EntitySet Name="EntityTypes" EntityType="Self.EntityType" />
           <EntitySet Name="Logins" EntityType="Self.Login" />
-          <EntitySet Name="attendance_bak" EntityType="Self.attendance_bak" />
           <AssociationSet Name="FK_Address_AddressType" Association="Self.FK_Address_AddressType">
             <End Role="AddressType" EntitySet="AddressTypes" />
             <End Role="Address" EntitySet="Addresses" />
@@ -503,7 +576,26 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           </AssociationSet>
           <EntitySet Name="EmpClients" EntityType="ubietydbModel.EmpClient" />
           <EntitySet Name="Roles" EntityType="ubietydbModel.Role" />
-        </EntityContainer>
+          <EntitySet Name="ClaimHeads" EntityType="ubietydbModel.ClaimHead" />
+          <EntitySet Name="ClaimLines" EntityType="ubietydbModel.ClaimLine" />
+          <EntitySet Name="ClaimStatus" EntityType="ubietydbModel.ClaimStatu" />
+          <AssociationSet Name="FK_ClaimHead_ClaimStatus" Association="ubietydbModel.FK_ClaimHead_ClaimStatus">
+            <End Role="ClaimStatu" EntitySet="ClaimStatus" />
+            <End Role="ClaimHead" EntitySet="ClaimHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimHead_Employee" Association="ubietydbModel.FK_ClaimHead_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ClaimHead" EntitySet="ClaimHeads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimLine_ClaimHead" Association="ubietydbModel.FK_ClaimLine_ClaimHead">
+            <End Role="ClaimHead" EntitySet="ClaimHeads" />
+            <End Role="ClaimLine" EntitySet="ClaimLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimLine_ClaimStatus" Association="ubietydbModel.FK_ClaimLine_ClaimStatus">
+            <End Role="ClaimStatu" EntitySet="ClaimStatus" />
+            <End Role="ClaimLine" EntitySet="ClaimLines" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="EmpClient">
           <Key>
             <PropertyRef Name="Id" />
@@ -519,7 +611,109 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="ClaimHead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="ClaimNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimTitle" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClaimStatu" Relationship="ubietydbModel.FK_ClaimHead_ClaimStatus" FromRole="ClaimHead" ToRole="ClaimStatu" />
+          <NavigationProperty Name="Employee" Relationship="ubietydbModel.FK_ClaimHead_Employee" FromRole="ClaimHead" ToRole="Employee" />
+          <NavigationProperty Name="ClaimLines" Relationship="ubietydbModel.FK_ClaimLine_ClaimHead" FromRole="ClaimHead" ToRole="ClaimLine" />
+        </EntityType>
+        <EntityType Name="ClaimLine">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClaimId" />
+            <PropertyRef Name="ClaimLineId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClaimId" Type="Int32" Nullable="false" />
+          <Property Name="ClaimLineId" Type="Int32" Nullable="false" />
+          <Property Name="ClaimType" Type="Int32" Nullable="false" />
+          <Property Name="Purpose" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocOut" Type="Byte" Nullable="false" />
+          <Property Name="HotelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="AccNoOfNights" Type="Int32" />
+          <Property Name="TravelFromPlace" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelToPlace" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TravelMode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Distance" Type="Double" />
+          <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OtherClaimTypeDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="BillType" Type="Byte" />
+          <Property Name="LineStatus" Type="Int32" Nullable="false" />
+          <Property Name="EmpRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrgRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClaimHead" Relationship="ubietydbModel.FK_ClaimLine_ClaimHead" FromRole="ClaimLine" ToRole="ClaimHead" />
+          <NavigationProperty Name="ClaimStatu" Relationship="ubietydbModel.FK_ClaimLine_ClaimStatus" FromRole="ClaimLine" ToRole="ClaimStatu" />
+        </EntityType>
+        <EntityType Name="ClaimStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClaimHeads" Relationship="ubietydbModel.FK_ClaimHead_ClaimStatus" FromRole="ClaimStatu" ToRole="ClaimHead" />
+          <NavigationProperty Name="ClaimLines" Relationship="ubietydbModel.FK_ClaimLine_ClaimStatus" FromRole="ClaimStatu" ToRole="ClaimLine" />
+        </EntityType>
+        <Association Name="FK_ClaimHead_ClaimStatus">
+          <End Type="ubietydbModel.ClaimStatu" Role="ClaimStatu" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimHead" Role="ClaimHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimHead">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimHead_Employee">
+          <End Type="ubietydbModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimHead" Role="ClaimHead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="ClaimHead">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimLine_ClaimHead">
+          <End Type="ubietydbModel.ClaimHead" Role="ClaimHead" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimLine" Role="ClaimLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimHead">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClaimLine">
+              <PropertyRef Name="ClaimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimLine_ClaimStatus">
+          <End Type="ubietydbModel.ClaimStatu" Role="ClaimStatu" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimLine" Role="ClaimLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimLine">
+              <PropertyRef Name="LineStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -621,19 +815,6 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="attendance_bak">
-            <EntityTypeMapping TypeName="ubietydbModel.attendance_bak">
-              <MappingFragment StoreEntitySet="attendance_bak">
-                <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
-                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
-                <ScalarProperty Name="MarkFlagId" ColumnName="MarkFlagId" />
-                <ScalarProperty Name="MarkTime" ColumnName="MarkTime" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="markcount" ColumnName="markcount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EmpClients">
             <EntityTypeMapping TypeName="ubietydbModel.EmpClient">
               <MappingFragment StoreEntitySet="EmpClient">
@@ -648,6 +829,54 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClaimHeads">
+            <EntityTypeMapping TypeName="ubietydbModel.ClaimHead">
+              <MappingFragment StoreEntitySet="ClaimHead">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClaimTitle" ColumnName="ClaimTitle" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClaimLines">
+            <EntityTypeMapping TypeName="ubietydbModel.ClaimLine">
+              <MappingFragment StoreEntitySet="ClaimLine">
+                <ScalarProperty Name="OrgRemarks" ColumnName="OrgRemarks" />
+                <ScalarProperty Name="ManagerRemarks" ColumnName="ManagerRemarks" />
+                <ScalarProperty Name="EmpRemarks" ColumnName="EmpRemarks" />
+                <ScalarProperty Name="LineStatus" ColumnName="LineStatus" />
+                <ScalarProperty Name="BillType" ColumnName="BillType" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="OtherClaimTypeDesc" ColumnName="OtherClaimTypeDesc" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="TravelMode" ColumnName="TravelMode" />
+                <ScalarProperty Name="TravelToPlace" ColumnName="TravelToPlace" />
+                <ScalarProperty Name="TravelFromPlace" ColumnName="TravelFromPlace" />
+                <ScalarProperty Name="AccNoOfNights" ColumnName="AccNoOfNights" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="LocOut" ColumnName="LocOut" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimLineId" ColumnName="ClaimLineId" />
+                <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClaimStatus">
+            <EntityTypeMapping TypeName="ubietydbModel.ClaimStatu">
+              <MappingFragment StoreEntitySet="ClaimStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

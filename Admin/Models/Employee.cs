@@ -17,6 +17,7 @@ namespace Admin.Models
         public Employee()
         {
             this.Attendances = new HashSet<Attendance>();
+            this.ClaimHeads = new HashSet<ClaimHead>();
         }
     
         public int EmpId { get; set; }
@@ -33,5 +34,6 @@ namespace Admin.Models
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual EmpStatu EmpStatu { get; set; }
         public virtual Login Login { get; set; }
+        public virtual ICollection<ClaimHead> ClaimHeads { get; set; }
     }
 }
