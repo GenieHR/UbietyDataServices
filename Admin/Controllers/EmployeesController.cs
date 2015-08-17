@@ -87,6 +87,8 @@ namespace Admin.Controllers
 
             var user = new IdentityUser() { UserName = employee.Email, Email = employee.Email, PhoneNumber = employee.PrimaryMobile.ToString() };
             IdentityResult result = manager.Create(user, WebConfigurationManager.AppSettings["DefaultPassword"]);
+
+            
             
             if (result.Succeeded)
             {
@@ -131,5 +133,27 @@ namespace Admin.Controllers
         {
             return db.Employees.Count(e => e.EmpId == id) > 0;
         }
+
+        [Route("api/clientEmps/{ClientId}")]
+        [HttpGet]
+        public ICollection<Employee> GetclientEmps(int ClientId)
+        {
+            var context = new ubietydbEntities();
+            List<Employee> empCollection = context.Employees.Where(b => b.CompanyId == ClientId).ToList();
+            return empCollection;
+        }
+
+        //[Route("api/clientEmps/{ClientId}")]
+        //[HttpGet]
+        //public ICollection<Employee> GetOrgEmp(int ClientId)
+        //{
+        //    var context = new ubietydbEntities();
+        //    context.Configuration.ProxyCreationEnabled = false;
+
+        //    var empclients = context.Employees.Where(b => b.CompanyId == ClientId).ToList();
+        //    return empclients;
+
+        //}
+
     }
 }
