@@ -12,20 +12,14 @@ namespace Admin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ClaimStatu
+    public partial class ClaimStatusHistory
     {
-        public ClaimStatu()
-        {
-            this.ClaimHeads = new HashSet<ClaimHead>();
-            this.ClaimLines = new HashSet<ClaimLine>();
-            this.ClaimStatusHistories = new HashSet<ClaimStatusHistory>();
-        }
-    
         public int Id { get; set; }
-        public string Status { get; set; }
+        public int ClaimId { get; set; }
+        public int StatusId { get; set; }
+        public System.DateTime StatusDateTime { get; set; }
     
-        public virtual ICollection<ClaimHead> ClaimHeads { get; set; }
-        public virtual ICollection<ClaimLine> ClaimLines { get; set; }
-        public virtual ICollection<ClaimStatusHistory> ClaimStatusHistories { get; set; }
+        public virtual ClaimHead ClaimHead { get; set; }
+        public virtual ClaimStatu ClaimStatu { get; set; }
     }
 }

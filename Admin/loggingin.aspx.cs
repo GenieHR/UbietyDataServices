@@ -23,8 +23,10 @@ namespace Admin
                    .Where(b => b.AuthUserId.Equals(str))
                    .FirstOrDefault();
 
+                Session["EmpId"] = employee.EmpId;
                 Session["loggedinuserName"]  = employee.EmpName;
                 Session["Designation"] = employee.Designation;
+                Session["EmpNum"] = employee.EmpNum;
 
                 if (System.Web.HttpContext.Current.User.IsInRole("OrgEmployee"))
                 {

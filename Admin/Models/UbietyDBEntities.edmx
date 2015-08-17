@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ubietydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -77,7 +77,7 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
             <PropertyRef Name="ClaimId" />
             <PropertyRef Name="ClaimLineId" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClaimId" Type="int" Nullable="false" />
           <Property Name="ClaimLineId" Type="int" Nullable="false" />
           <Property Name="ClaimType" Type="int" Nullable="false" />
@@ -107,6 +107,15 @@ warning 6002: The table/view 'ubietydb.dbo.attendance_bak' does not have a prima
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClaimStatusHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="StatusDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="EmpClient">
           <Key>
@@ -298,6 +307,30 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ClaimStatusHistory_ClaimHead">
+          <End Role="ClaimHead" Type="Self.ClaimHead" Multiplicity="1" />
+          <End Role="ClaimStatusHistory" Type="Self.ClaimStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimHead">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClaimStatusHistory">
+              <PropertyRef Name="ClaimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimStatusHistory_ClaimStatus">
+          <End Role="ClaimStatus" Type="Self.ClaimStatus" Multiplicity="1" />
+          <End Role="ClaimStatusHistory" Type="Self.ClaimStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimStatusHistory">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_EmpStatus">
           <End Role="EmpStatus" Type="Self.EmpStatus" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -354,6 +387,7 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <EntitySet Name="ClaimHead" EntityType="Self.ClaimHead" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClaimLine" EntityType="Self.ClaimLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClaimStatus" EntityType="Self.ClaimStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClaimStatusHistory" EntityType="Self.ClaimStatusHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpClient" EntityType="Self.EmpClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpStatus" EntityType="Self.EmpStatus" Schema="dbo" store:Type="Tables" />
@@ -432,6 +466,14 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
             <End Role="ClaimStatus" EntitySet="ClaimStatus" />
             <End Role="ClaimLine" EntitySet="ClaimLine" />
           </AssociationSet>
+          <AssociationSet Name="FK_ClaimStatusHistory_ClaimHead" Association="Self.FK_ClaimStatusHistory_ClaimHead">
+            <End Role="ClaimHead" EntitySet="ClaimHead" />
+            <End Role="ClaimStatusHistory" EntitySet="ClaimStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimStatusHistory_ClaimStatus" Association="Self.FK_ClaimStatusHistory_ClaimStatus">
+            <End Role="ClaimStatus" EntitySet="ClaimStatus" />
+            <End Role="ClaimStatusHistory" EntitySet="ClaimStatusHistory" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_EmpStatus" Association="Self.FK_Employee_EmpStatus">
             <End Role="EmpStatus" EntitySet="EmpStatus" />
             <End Role="Employee" EntitySet="Employee" />
@@ -449,8 +491,7 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
             <End Role="Login" EntitySet="Login" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ubietydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -512,6 +553,7 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <NavigationProperty Name="ClaimStatu" Relationship="Self.FK_ClaimHead_ClaimStatus" FromRole="ClaimHead" ToRole="ClaimStatus" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_ClaimHead_Employee" FromRole="ClaimHead" ToRole="Employee" />
           <NavigationProperty Name="ClaimLines" Relationship="Self.FK_ClaimLine_ClaimHead" FromRole="ClaimHead" ToRole="ClaimLine" />
+          <NavigationProperty Name="ClaimStatusHistories" Relationship="ubietydbModel.FK_ClaimStatusHistory_ClaimHead" FromRole="ClaimHead" ToRole="ClaimStatusHistory" />
         </EntityType>
         <EntityType Name="ClaimLine">
           <Key>
@@ -553,6 +595,7 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ClaimHeads" Relationship="Self.FK_ClaimHead_ClaimStatus" FromRole="ClaimStatus" ToRole="ClaimHead" />
           <NavigationProperty Name="ClaimLines" Relationship="Self.FK_ClaimLine_ClaimStatus" FromRole="ClaimStatus" ToRole="ClaimLine" />
+          <NavigationProperty Name="ClaimStatusHistories" Relationship="ubietydbModel.FK_ClaimStatusHistory_ClaimStatus" FromRole="ClaimStatu" ToRole="ClaimStatusHistory" />
         </EntityType>
         <EntityType Name="EmpClient">
           <Key>
@@ -872,7 +915,51 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
             <End Role="EntityType" EntitySet="EntityTypes" />
             <End Role="EntityAddresses" EntitySet="EntityAddresses" />
           </AssociationSet>
+          <EntitySet Name="ClaimStatusHistories" EntityType="ubietydbModel.ClaimStatusHistory" />
+          <AssociationSet Name="FK_ClaimStatusHistory_ClaimHead" Association="ubietydbModel.FK_ClaimStatusHistory_ClaimHead">
+            <End Role="ClaimHead" EntitySet="ClaimHeads" />
+            <End Role="ClaimStatusHistory" EntitySet="ClaimStatusHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimStatusHistory_ClaimStatus" Association="ubietydbModel.FK_ClaimStatusHistory_ClaimStatus">
+            <End Role="ClaimStatu" EntitySet="ClaimStatus" />
+            <End Role="ClaimStatusHistory" EntitySet="ClaimStatusHistories" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ClaimStatusHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ClaimHead" Relationship="ubietydbModel.FK_ClaimStatusHistory_ClaimHead" FromRole="ClaimStatusHistory" ToRole="ClaimHead" />
+          <NavigationProperty Name="ClaimStatu" Relationship="ubietydbModel.FK_ClaimStatusHistory_ClaimStatus" FromRole="ClaimStatusHistory" ToRole="ClaimStatu" />
+        </EntityType>
+        <Association Name="FK_ClaimStatusHistory_ClaimHead">
+          <End Type="ubietydbModel.ClaimHead" Role="ClaimHead" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimStatusHistory" Role="ClaimStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimHead">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ClaimStatusHistory">
+              <PropertyRef Name="ClaimId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimStatusHistory_ClaimStatus">
+          <End Type="ubietydbModel.ClaimStatu" Role="ClaimStatu" Multiplicity="1" />
+          <End Type="ubietydbModel.ClaimStatusHistory" Role="ClaimStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClaimStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaimStatusHistory">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1088,6 +1175,16 @@ warning 6002: The table/view 'ubietydb.dbo.attRepTemp' does not have a primary k
                 <ScalarProperty Name="MarkTime" ColumnName="MarkTime" />
                 <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
                 <ScalarProperty Name="MarkCount" ColumnName="MarkCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClaimStatusHistories">
+            <EntityTypeMapping TypeName="ubietydbModel.ClaimStatusHistory">
+              <MappingFragment StoreEntitySet="ClaimStatusHistory">
+                <ScalarProperty Name="StatusDateTime" ColumnName="StatusDateTime" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

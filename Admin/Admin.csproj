@@ -220,6 +220,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClaimHeadsController.cs" />
+    <Compile Include="Controllers\ClaimLinesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EmpStatusController.cs" />
@@ -317,6 +319,9 @@
     <Compile Include="Models\ClaimStatu.cs">
       <DependentUpon>ubietydbEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClaimStatusHistory.cs">
+      <DependentUpon>ubietydbEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Client.cs">
       <DependentUpon>UserRepo.tt</DependentUpon>
     </Compile>
@@ -409,6 +414,13 @@
     <Compile Include="ShowClients.aspx.designer.cs">
       <DependentUpon>ShowClients.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShowEmployees.aspx.cs">
+      <DependentUpon>ShowEmployees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowEmployees.aspx.designer.cs">
+      <DependentUpon>ShowEmployees.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="CreateEmployee.aspx.cs">
       <DependentUpon>CreateEmployee.aspx</DependentUpon>
@@ -439,10 +451,7 @@
     <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\imageModal.css" />
-    <Content Include="css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
-    <Content Include="css\plugins\iCheck\custom.css" />
-    <Content Include="css\plugins\iCheck\green%402x.png" />
-    <Content Include="css\plugins\iCheck\green.png" />
+    <Content Include="css\plugins\toastr\toastr.min.css" />
     <Content Include="css\spinners.css" />
     <Content Include="css\style.css" />
     <Content Include="dashboard.aspx" />
@@ -556,6 +565,7 @@
     <Content Include="font-awesome\fonts\fontawesome-webfonte0a5.woff2" />
     <Content Include="CreateEmployee.aspx" />
     <Content Include="ShowClients.aspx" />
+    <Content Include="ShowEmployees.aspx" />
     <Content Include="WebForm2.aspx" />
     <EntityDeploy Include="Models\UserRepo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

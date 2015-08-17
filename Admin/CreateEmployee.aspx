@@ -191,7 +191,6 @@
 
         <script type='text/javascript'>
 
-         //$(document).ready(function(){
 
              $("#formoid").validate({
                  rules: {

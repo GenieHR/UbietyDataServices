@@ -4926,6 +4926,27 @@ del {
   padding: 0;
   border: 1px solid #e7eaec;
 }
+
+.product-box.travel-box {
+  padding: 0;
+  border: 1px solid #e7eaec;
+  background-color:#F0F8FF;
+}
+
+.product-box.food-box {
+  padding: 0;
+  border: 1px solid #e7eaec;
+  background-color:#fdebee;
+}
+
+.product-box.acc-box {
+  padding: 0;
+  border: 1px solid #e7eaec;
+  background-color:#f0edf0  ;
+}
+
+
+
 .product-box:hover,
 .product-box.active {
   border: 1px solid transparent;
@@ -4980,6 +5001,7 @@ del {
   top: -32px;
   right: 0;
 }
+
 /* Social feed */
 .social-feed-separated .social-feed-box {
   margin-left: 62px;

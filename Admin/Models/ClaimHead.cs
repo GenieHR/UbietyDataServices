@@ -17,6 +17,7 @@ namespace Admin.Models
         public ClaimHead()
         {
             this.ClaimLines = new HashSet<ClaimLine>();
+            this.ClaimStatusHistories = new HashSet<ClaimStatusHistory>();
         }
     
         public int id { get; set; }
@@ -28,5 +29,6 @@ namespace Admin.Models
         public virtual ClaimStatu ClaimStatu { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual ICollection<ClaimLine> ClaimLines { get; set; }
+        public virtual ICollection<ClaimStatusHistory> ClaimStatusHistories { get; set; }
     }
 }

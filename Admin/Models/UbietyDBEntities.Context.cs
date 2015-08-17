@@ -43,5 +43,6 @@ namespace Admin.Models
         public virtual DbSet<test_att> test_att { get; set; }
         public virtual DbSet<attendancereport> attendancereports { get; set; }
         public virtual DbSet<attRepTemp> attRepTemps { get; set; }
+        public virtual DbSet<ClaimStatusHistory> ClaimStatusHistories { get; set; }
     }
 }

@@ -24,9 +24,11 @@ namespace Admin
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            Session["EmpId"] = 0;
             Session["RoleId"] = 0;
             Session["loggedinuserName"] = "";
-            Session["Designation"] = ""; 
+            Session["Designation"] = "";
+            Session["EmpNum"] = "";
         }
     }
 }

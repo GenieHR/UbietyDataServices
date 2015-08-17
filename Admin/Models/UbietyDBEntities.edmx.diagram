@@ -34,6 +34,9 @@
         <AssociationConnector Association="ubietydbModel.FK_Employee_EmpStatus" ManuallyRouted="false" />
         <AssociationConnector Association="ubietydbModel.FK_Login_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="ubietydbModel.FK_EntityAddresses_EntityType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ubietydbModel.ClaimStatusHistory" Width="1.5" PointX="13.5" PointY="8.625" />
+        <AssociationConnector Association="ubietydbModel.FK_ClaimStatusHistory_ClaimHead" />
+        <AssociationConnector Association="ubietydbModel.FK_ClaimStatusHistory_ClaimStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

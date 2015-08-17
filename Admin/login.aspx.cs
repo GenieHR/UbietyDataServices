@@ -15,25 +15,34 @@ namespace Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-        
-        //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-        // if (!roleManager.RoleExists("SuperAdmin"))
-        //roleManager.Create(new IdentityRole("OrgAdmin"));
-        //roleManager.Create(new IdentityRole("OrgManager"));
-        //roleManager.Create(new IdentityRole("OrgEmployee"));
-        //roleManager.Create(new IdentityRole("ClientAdmin"));
-        //roleManager.Create(new IdentityRole("ClientManager"));
-        //roleManager.Create(new IdentityRole("ClientEmployee"));
+
+            //var userStore = new UserStore<IdentityUser>();
+            //var manager = new UserManager<IdentityUser>(userStore);
+
+           // var user = new IdentityUser();
+
+           //user =  ;
+
+            //manager.Delete(manager.FindById("eab944f3-004d-43d4-ae8b-133d95ab0911"));
+
+            //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            // if (!roleManager.RoleExists("SuperAdmin"))
+            //roleManager.Create(new IdentityRole("OrgAdmin"));
+            //roleManager.Create(new IdentityRole("OrgManager"));
+            //roleManager.Create(new IdentityRole("OrgEmployee"));
+            //roleManager.Create(new IdentityRole("ClientAdmin"));
+            //roleManager.Create(new IdentityRole("ClientManager"));
+            //roleManager.Create(new IdentityRole("ClientEmployee"));
 
 
-        //   DefaultConnection1 context = new DefaultConnection1();
+           //DefaultConnection1 context = new DefaultConnection1();
 
-        //   var userStore = new UserStore<IdentityUser>();
-        //   var UserManager = new UserManager<IdentityUser>(userStore);
+           //var userStore = new UserStore<IdentityUser>();
+           //var UserManager = new UserManager<IdentityUser>(userStore);
 
         //try
         //{
-        //    var user = UserManager.FindByName("dhimanamit81@gmail.com");
+          //  var user = UserManager.FindByName("dhimanamit81@gmail.com");
         //    UserManager.AddToRole(user.Id, "ClientEmployee");
             
         //    user = UserManager.FindByName("Aamir.Red.devil@gmail.com");
@@ -57,7 +66,7 @@ namespace Admin
         //    user = UserManager.FindByName("civilengineer8118@gmail.com");
         //    UserManager.AddToRole(user.Id, "ClientEmployee");
 
-        //    user = UserManager.FindByName("erzahoor1343@gmail.com");
+        //    user = UserManager.FindById("d3681832-98cd-48ca-bdd3-2f7e30321ad4");
         //    UserManager.AddToRole(user.Id, "ClientEmployee");
 
         //    user = UserManager.FindByName("preeti.negi@geniehr.com");
