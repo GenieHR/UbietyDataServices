@@ -53,17 +53,17 @@ namespace Admin.Controllers
             return clientCollection;
         }
 
-        [Route("api/clientEmps/{ClientId}")]
-        [HttpGet]
-        public ICollection<Employee> GetOrgEmp(int ClientId)
-        {
-            var context = new ubietydbEntities();
-            context.Configuration.ProxyCreationEnabled = false;
+        //[Route("api/clientEmps/{ClientId}")]
+        //[HttpGet]
+        //public ICollection<Employee> GetOrgEmp(int ClientId)
+        //{
+        //    var context = new ubietydbEntities();
+        //    context.Configuration.ProxyCreationEnabled = false;
 
-            var empclients = context.Employees.Where(b => b.CompanyId == ClientId).ToList();
-            return empclients;
+        //    var empclients = context.Employees.Where(b => b.CompanyId == ClientId).ToList();
+        //    return empclients;
             
-        }
+        //}
 
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]
