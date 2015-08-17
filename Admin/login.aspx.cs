@@ -16,14 +16,14 @@ namespace Admin
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //var userStore = new UserStore<IdentityUser>();
-            //var manager = new UserManager<IdentityUser>(userStore);
+       //     var userStore = new UserStore<IdentityUser>();
+       //     var manager = new UserManager<IdentityUser>(userStore);
 
            // var user = new IdentityUser();
 
            //user =  ;
 
-            //manager.Delete(manager.FindById("eab944f3-004d-43d4-ae8b-133d95ab0911"));
+        //    manager.Delete(manager.FindById("9d334fe5-f2e9-4c14-bc1d-68c1ad9d1e4e"));
 
             //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
             // if (!roleManager.RoleExists("SuperAdmin"))

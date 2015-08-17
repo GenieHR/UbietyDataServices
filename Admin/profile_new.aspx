@@ -6,6 +6,7 @@
 <head>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="js/plugins/table2Excel/ExportHTML.js"></script>
 
 
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" />
@@ -18,7 +19,6 @@
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 
-    <script src="js/plugins/table2Excel/ExportHTML.js"></script>
     <title>Employee Profile</title>
 
     <style>

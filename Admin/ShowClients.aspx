@@ -27,7 +27,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: "api/orgEmpClients/<%=Session["EmpId"]%>",
+                url: "api/orgEmpClients/<%= Session["EmpId"] %>",
                 type: "Get",
                 success: function (data) {
 

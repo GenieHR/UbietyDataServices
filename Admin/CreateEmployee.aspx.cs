@@ -5,16 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace UbietyAdmin
+namespace Admin
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class CreateEmployee : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.User.Identity.Name.Equals(""))
-            {
-                Response.Redirect("~/Login.aspx");
-            }
+
         }
     }
 }
